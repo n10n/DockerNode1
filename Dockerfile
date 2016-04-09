@@ -20,9 +20,9 @@ RUN echo http://dl-4.alpinelinux.org/alpine/v3.3/main >> /etc/apk/repositories &
     git clone -b forespray https://github.com/n10n/SpecialK.git  && \
     git clone -b master https://github.com/n10n/agent-service-ati-ia.git  && \
     git clone -b livelygig-api https://github.com/n10n/lgimporter.git && \
-
-    cd SpecialK && \
+    \
     ln -s lgimporter GLoSEval && \
+    cd SpecialK && \
     mvn -e -fn -DskipTests=true install prepare-package && \
     cd ../agent-service-ati-ia/AgentServices-Store && \
     mvn -e -fn -DskipTests=true install prepare-package && \
