@@ -20,11 +20,11 @@ RUN \
          /usr/lib/apache-maven-3.3.9-bin.tar.gz && \
     cd /usr/lib/ && \
     tar -xzvf apache-maven-3.3.9-bin.tar.gz && \
-    rm -f apache-maven-3.3.9-bin.tar.gz
+    rm -f apache-maven-3.3.9-bin.tar.gz && \
     \
     ln -s /usr/lib/jvm/java-1.8-openjdk/bin/javac /usr/bin/javac && \
     ln -s /usr/lib/jvm/java-1.8-openjdk/bin/jar /usr/bin/jar && \
-    ln -s /usr/lib/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
+    ln -s /usr/lib/apache-maven-3.3.9/bin/mvn /usr/bin/mvn && \
     \
     cd $W_DIR && \
     git clone -b forespray https://github.com/n10n/SpecialK.git  && \
