@@ -38,7 +38,7 @@ RUN \
     mvn -e -fn -DskipTests=true install prepare-package && \
     cd $W_DIR/lgimporter && \
     mvn -e -fn -DskipTests=true install prepare-package && \
-#    cd .. && \
+    \
     mkdir $S_DIR && \
     mkdir $S_DIR/lib && \
     mkdir $S_DIR/logs && \
@@ -54,12 +54,11 @@ RUN \
 #    echo java -cp \$CLASSPATH com.biosimilarity.evaluator.spray.Boot -unchecked -deprecation -encoding utf8 -usejavacp >> zexe/run.sh && \
     echo java -cp "lib/*" com.biosimilarity.evaluator.spray.Boot \& >> $S_DIR/run.sh && \
     chmod 755 $S_DIR/run.sh && \
-    cp GLoSEval/eval.conf $S_DIR/ && \
-    cp GLoSEval/log.properties $S_DIR/ && \
-    rm  $S_DIR/lib/casbah*5.1*.jar && \
-    rm  $S_DIR/lib/casbah*5.1*.pom && \
-    cp GLoSEval/src/main/resources/media/queenbee64.txt $S_DIR/src/main/resources/media  && \
-    cd $S_DIR
+    cp $W_DIR/GLoSEval/eval.conf $S_DIR/ && \
+    cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
+    cp $W_DIR/GLoSEval/src/main/resources/media/queenbee64.txt $S_DIR/src/main/resources/media  && \
+    rm $S_DIR/lib/casbah*5.1*.jar && \
+    rm $S_DIR/lib/casbah*5.1*.pom && \
      
 EXPOSE 9876
 CMD [ /etc/init.d/$S_CMD ]
