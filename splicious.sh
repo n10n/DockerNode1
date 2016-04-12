@@ -1,4 +1,6 @@
-#! /bin/sh
+#!/sbin/openrc-run
+# ! / bin / sh
+# openrc-run for alpine linux
 ### BEGIN INIT INFO
 # Provides:          Splicious
 # Required-Start:    $local_fs $remote_fs $network $syslog
