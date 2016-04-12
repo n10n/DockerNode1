@@ -6,12 +6,12 @@ MAINTAINER N<ns68751+n10n@gmail.com>
 ENV W_DIR /usr/local
 ENV S_DIR $W_DIR/splicious
 ENV S_CMD splicious.sh
-ADD splicious.sh /etc/init.d/$S_CMD
+ADD splicious-alpine.sh /etc/init.d/$S_CMD
 
 # Install OpenJDK 8, Maven and other software
 RUN \
     chmod 755 /etc/init.d/$S_CMD && \
-    ln -s /etc/init.d/$S_CMD /etc/runlevels/$S_CMD && \
+    ln -s /etc/init.d/$S_CMD /etc/runlevels/default/$S_CMD && \
 #    update-rc.d /etc/init.d/$S_CMD defaults && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/main >> /etc/apk/repositories && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/community>> /etc/apk/repositories && \
@@ -62,4 +62,4 @@ RUN \
     cd $S_DIR
      
 EXPOSE 9876
-CMD [ /etc/init.d/$S_CMD start ]
+CMD [ /etc/init.d/$S_CMD ]
