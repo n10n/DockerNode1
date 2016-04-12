@@ -11,7 +11,7 @@ ADD splicious-alpine.sh /etc/init.d/$S_CMD
 # Install OpenJDK 8, Maven and other software
 RUN \
     chmod 755 /etc/init.d/$S_CMD && \
-    ln -s /etc/init.d/$S_CMD /etc/runlevels/default/$S_CMD && \
+#    ln -s /etc/init.d/$S_CMD /etc/runlevels/default/$S_CMD && \
 #    update-rc.d /etc/init.d/$S_CMD defaults && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/main >> /etc/apk/repositories && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/community>> /etc/apk/repositories && \
