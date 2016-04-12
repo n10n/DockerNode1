@@ -1,5 +1,4 @@
-#!/sbin/openrc-run
-# ! / bin / sh
+#! /bin/sh
 # openrc-run for alpine linux
 ### BEGIN INIT INFO
 # Provides:          Splicious
