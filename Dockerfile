@@ -29,23 +29,18 @@ RUN \
     cd $W_DIR && \
     git clone -b forespray https://github.com/n10n/SpecialK.git  && \
     git clone -b master https://github.com/n10n/agent-service-ati-ia.git  && \
-    git clone -b livelygig-api https://github.com/n10n/lgimporter.git && \
+    git clone -b livelygig-api https://github.com/n10n/lgimporter.git GLoSEval && \
     \
-    ln -s $W_DIR/lgimporter $W_DIR/GLoSEval && \
     cd $W_DIR/SpecialK && \
     mvn -e -fn -DskipTests=true install prepare-package && \
     cd $W_DIR/agent-service-ati-ia/AgentServices-Store && \
     mvn -e -fn -DskipTests=true install prepare-package && \
-    cd $W_DIR/lgimporter && \
+    cd $W_DIR/GLoSEval && \
     mvn -e -fn -DskipTests=true install prepare-package && \
     \
-    mkdir $S_DIR && \
+    mkdir -p $S_DIR/src/main/resources/media && \
     mkdir $S_DIR/lib && \
     mkdir $S_DIR/logs && \
-    mkdir $S_DIR/src  && \
-    mkdir $S_DIR/src/main && \
-    mkdir $S_DIR/src/main/resources && \
-    mkdir $S_DIR/src/main/resources/media && \
     cp -rP $W_DIR/SpecialK/target/lib/* $S_DIR/lib/ && \
     cp -rP $W_DIR/agent-service-ati-ia/AgentServices-Store/target/lib/* $S_DIR/lib/ && \
     cp -rP $W_DIR/GLoSEval/target/lib/* $S_DIR/lib/ && \
