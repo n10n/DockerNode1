@@ -53,7 +53,7 @@ RUN \
     cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
     cp $W_DIR/GLoSEval/src/main/resources/media/queenbee64.txt $S_DIR/src/main/resources/media  && \
     rm $S_DIR/lib/casbah*5.1*.jar && \
-    rm $S_DIR/lib/casbah*5.1*.pom && \
+    rm $S_DIR/lib/casbah*5.1*.pom
      
 EXPOSE 9876
 CMD [ /etc/init.d/$S_CMD ]
