@@ -8,7 +8,11 @@ Download files using: git clone https://github.com/n10n/DockerNode.git
 
 Build docker image using: 
 
- docker build -t SpecialKBackend .
+  docker build -t .
+ 
+Make a note of the Image ID
+ 
+  docker commit  <ImageIDFromAboveStep> SpecialKBackend 
 
 Run docker image - manual process: 
 
