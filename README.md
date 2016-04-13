@@ -18,7 +18,7 @@ Run docker image - manual process:
 
   At the command prompt
   cd /usr/local/splicious
-  splicious start
+  ./splicious.sh start
   
 Run docker image - automated process: 
   docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 ImageIDFromAboveStep /usr/local/splicious.sh start
