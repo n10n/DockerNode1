@@ -12,15 +12,15 @@ Build docker image using:
 
 Run docker image - manual process: 
 
-  docker run -i -t -e MONGODB_HOST=<IP_ADDRESS> -e MONGODB_PORT=27017 -p 8888:9876 SpecialKBackend /bin/bash
+  docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 SpecialKBackend /bin/bash
 
   At the command prompt
   cd /usr/local/splicious
   splicious start
   
 Run docker image - automated process: 
-  docker run -i -t -e MONGODB_HOST=<IP_ADDRESS> -e MONGODB_PORT=27017 -p 8888:9876 SpecialKBackend /usr/local/splicious.sh start
+  docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 SpecialKBackend /usr/local/splicious.sh start
   
-To see log files go to /usr/local/splicious/logs folder.
+Please replace the IP_ADDRESS appropriately. To see log files go to /usr/local/splicious/logs folder.
 
 Visit the webpage http://localhost:8888/agentui/agentui.html?demo=false
