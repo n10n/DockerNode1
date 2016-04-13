@@ -1,5 +1,5 @@
-#!/sbin/openrc-run
-
+# ! / sbin/openrc-run
+#! /bin/sh
 ### BEGIN INIT INFO
 # Provides:          Splicious
 # Required-Start:    $local_fs $remote_fs $network $syslog
