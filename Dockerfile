@@ -7,6 +7,7 @@ ENV W_DIR /usr/local
 ENV S_DIR $W_DIR/splicious
 ENV S_CMD splicious.sh
 ENV MONGODB_HOST 127.0.0.1
+ENV MONGODB_PORT 27017
 COPY splicious.sh $W_DIR/$S_CMD
 WORKDIR $W_DIR
 ADD agentui.tar.gz $W_DIR
