@@ -7,16 +7,13 @@ ENV W_DIR /usr/local
 ENV S_DIR $W_DIR/splicious
 ENV S_CMD splicious.sh
 ENV MONGODB_HOST 127.0.0.1
-ADD splicious-alpine.sh /etc/init.d/$S_CMD
+COPY splicious.sh $W_DIR/$S_CMD
 WORKDIR $W_DIR
 ADD agentui.tar.gz $W_DIR
 COPY entrypoint.sh $W_DIR
 
 # Install OpenJDK 8, Maven and other software
 RUN \
-    chmod 755 /etc/init.d/$S_CMD && \
-#    ln -s /etc/init.d/$S_CMD /etc/runlevels/default/$S_CMD && \
-#    update-rc.d /etc/init.d/$S_CMD defaults && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/main >> /etc/apk/repositories && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/community>> /etc/apk/repositories && \
     apk --update add openjdk8 automake autoconf bash gcc git libc-dev imake ncurses-dev openjdk8 openssh && \
@@ -51,17 +48,23 @@ RUN \
     cp -rP $W_DIR/GLoSEval/target/GLoSEval-0.1.jar $S_DIR/lib/ && \
 #    echo CLASSPATH=\`find lib -name "*.jar" -exec echo -n {}: \\\;\`lib\/ >$S_DIR/run.sh && \
 #    echo java -cp \$CLASSPATH com.biosimilarity.evaluator.spray.Boot -unchecked -deprecation -encoding utf8 -usejavacp >> zexe/run.sh && \
-    echo java -cp \"lib/*\" com.biosimilarity.evaluator.spray.Boot \& >> $S_DIR/run.sh && \
+    echo java -cp \"lib/*\" com.biosimilarity.evaluator.spray.Boot >> $S_DIR/run.sh && \
     chmod 755 $S_DIR/run.sh && \
     cp $W_DIR/GLoSEval/eval.conf $S_DIR/ && \
     cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
     mv $W_DIR/agentui $S_DIR/ && \
-    cd $S_DIR/ && \
+    mv $W_DIR/$S_CMD $S_DIR/ && \
+    chmod 755 $S_DIR/$S_CMD && \
     \
     cp $W_DIR/GLoSEval/src/main/resources/media/queenbee64.txt $S_DIR/src/main/resources/media  && \
     rm $S_DIR/lib/casbah*5.1*.jar && \
-    rm $S_DIR/lib/*.pom
+    rm $S_DIR/lib/*.pom && \
+#   Autostart 
+#    chmod 755 /etc/init.d/$S_CMD && \
+#    ln -s /etc/init.d/$S_CMD /etc/runlevels/default/$S_CMD && \
+#    update-rc.d /etc/init.d/$S_CMD defaults && \
+    cd $S_DIR/
      
 EXPOSE 9876
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
-CMD [ /etc/init.d/$S_CMD ]
+CMD [ $S_DIR/$S_CMD start ]
