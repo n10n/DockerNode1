@@ -6,7 +6,11 @@ MAINTAINER N<ns68751+n10n@gmail.com>
 ENV W_DIR /usr/local
 ENV S_DIR $W_DIR/splicious
 ENV S_CMD splicious.sh
+ENV MONGODB_HOST 127.0.0.1
 ADD splicious-alpine.sh /etc/init.d/$S_CMD
+WORKDIR $W_DIR
+ADD agentui.tar.gz $W_DIR
+COPY entrypoint.sh $W_DIR
 
 # Install OpenJDK 8, Maven and other software
 RUN \
@@ -47,13 +51,17 @@ RUN \
     cp -rP $W_DIR/GLoSEval/target/GLoSEval-0.1.jar $S_DIR/lib/ && \
 #    echo CLASSPATH=\`find lib -name "*.jar" -exec echo -n {}: \\\;\`lib\/ >$S_DIR/run.sh && \
 #    echo java -cp \$CLASSPATH com.biosimilarity.evaluator.spray.Boot -unchecked -deprecation -encoding utf8 -usejavacp >> zexe/run.sh && \
-    echo java -cp "lib/*" com.biosimilarity.evaluator.spray.Boot \& >> $S_DIR/run.sh && \
+    echo java -cp \"lib/*\" com.biosimilarity.evaluator.spray.Boot \& >> $S_DIR/run.sh && \
     chmod 755 $S_DIR/run.sh && \
     cp $W_DIR/GLoSEval/eval.conf $S_DIR/ && \
     cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
+    mv $W_DIR/agentui $S_DIR/ && \
+    cd $S_DIR/ && \
+    \
     cp $W_DIR/GLoSEval/src/main/resources/media/queenbee64.txt $S_DIR/src/main/resources/media  && \
     rm $S_DIR/lib/casbah*5.1*.jar && \
-    rm $S_DIR/lib/casbah*5.1*.pom
+    rm $S_DIR/lib/*.pom
      
 EXPOSE 9876
+ENTRYPOINT ["/usr/local/entrypoint.sh"]
 CMD [ /etc/init.d/$S_CMD ]
