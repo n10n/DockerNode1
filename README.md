@@ -9,21 +9,19 @@ Download files using: git clone https://github.com/n10n/DockerNode.git
 Build docker image using: 
 
   docker build -t .
- 
+
 Make a note of the Image ID
  
-  docker commit  <ImageIDFromAboveStep> SpecialKBackend 
-
 Run docker image - manual process: 
 
-  docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 SpecialKBackend /bin/bash
+  docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 ImageIDFromAboveStep /bin/bash
 
   At the command prompt
   cd /usr/local/splicious
   splicious start
   
 Run docker image - automated process: 
-  docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 SpecialKBackend /usr/local/splicious.sh start
+  docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 -p 8888:9876 ImageIDFromAboveStep /usr/local/splicious.sh start
   
 Please replace the IP_ADDRESS appropriately. To see log files go to /usr/local/splicious/logs folder.
 
