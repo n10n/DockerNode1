@@ -29,7 +29,7 @@ At the # command prompt
 
     3a. docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 \
               --name SpliciousBKEND -p 8888:9876 ImageIDFromBuildStep \
-              /usr/local/splicious.sh start
+              /usr/local/splicious/splicious.sh start
   
 Please replace the IP_ADDRESS appropriately. To see log files, go to /usr/local/splicious/logs folder.
 
