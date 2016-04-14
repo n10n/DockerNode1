@@ -1,6 +1,6 @@
 ## Prerequisite
   - git client installed and git command in path
-  - docker installed (https://www.docker.com/) and running (start using Docker Quick Terminal)
+  - docker installed (https://www.docker.com/) and running (start using Docker Quick Terminal and make a note of the IP address assigned for example 192.168.99.100)
   - mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version
   - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/)
 
@@ -35,7 +35,7 @@ Please replace the IP_ADDRESS appropriately. To see log files, go to /usr/local/
 
 ## Access container:
 
-Visit the webpage http://localhost:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the map like 192.168.99.100:32772 then the URL would be http://192.168.99.100:32772/agentui/agentui.html?demo=false
+Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the map like 192.168.99.100:32772 then the URL would be http://192.168.99.100:32772/agentui/agentui.html?demo=false or http://192.168.99.100:8888/agentui/agentui.html?demo=false
 
 (https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk)
 
