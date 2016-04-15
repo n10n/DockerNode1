@@ -1,10 +1,11 @@
 ## Prerequisite
   - git client installed and git command in path
-  - docker installed (https://www.docker.com/) and running (start using Docker Quick Terminal and make a note of the IP address assigned for example 192.168.99.100)
+  - docker installed (https://www.docker.com/) and running (start Docker Quick Terminal and make a note of the IP address assigned and for example default IP address is 192.168.99.100)
   - mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version
   - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/)
 
-Download files in a directory of your choice to build Docker image and make sure docker is available: 
+## Source files
+Download files in a directory of your choice to build Docker image and make sure docker is running and available: 
 
     1. git clone https://github.com/n10n/DockerNode.git SpliciousBKND
 
