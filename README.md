@@ -37,7 +37,7 @@ Please replace the IP_ADDRESS appropriately. To see log files, go to /usr/local/
 
 Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the map like 192.168.99.100:32772 then the URL would be http://192.168.99.100:32772/agentui/agentui.html?demo=false or http://192.168.99.100:8888/agentui/agentui.html?demo=false
 
-![Screenshot](https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk, "screenshot")
+![Screenshot](https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk "screenshot")
 
 ## Other notes:
 
