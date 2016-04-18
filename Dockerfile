@@ -1,6 +1,7 @@
 # Set the base image
 FROM alpine:3.3
 
+LABEL description="Synereo Docker Image Beta" version="0.1.0"
 MAINTAINER N<ns68751+n10n@gmail.com>
 
 ENV W_DIR /usr/local
@@ -65,6 +66,8 @@ RUN \
 #    ln -s /etc/init.d/$S_CMD /etc/runlevels/default/$S_CMD && \
 #    update-rc.d /etc/init.d/$S_CMD defaults && \
     cd $S_DIR/
+
+WORKDIR $S_DIR
      
 EXPOSE 9876
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
