@@ -13,13 +13,13 @@ Download files in a directory of your choice to build Docker image and make sure
 Run the following command 
 
     2a. cd SpliciousBKND
-    2b. docker build .
+    2b. docker build -t SpliciousBKENDImage . 
 
-  Make a note of the Image ID and follow either manual or automated process step 3a
+  If step 2b failed for some reason, try to run (docker build .) and make a note of the Image ID and follow either manual or automated process step 3a
  
 ## Run docker image - manual process: 
 
-    3a. docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 --name SpliciousBKEND -p 8888:9876 ImageIDFromBuildStep /bin/bash
+    3a. docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 --name SpliciousBKEND -p 8888:9876 [ImageIDFromBuildStep_2b] /bin/bash
   
 At the # command prompt
     
@@ -29,7 +29,7 @@ At the # command prompt
 ## Run docker image - automated process: 
 
     3a. docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 \
-              --name SpliciousBKEND -p 8888:9876 ImageIDFromBuildStep \
+              --name SpliciousBKEND -p 8888:9876 [ImageIDFromBuildStep_2b] \
               /usr/local/splicious/splicious.sh start
   
 Please replace the IP_ADDRESS appropriately. To see log files, go to /usr/local/splicious/logs folder.
@@ -42,6 +42,8 @@ See screenshot
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
 
 ## Other notes:
+
+To access UI from outside of the docker host, you would need to map the dockerhost ip/port to docker guest ip/port in Virtual Box (Network -> Port Forwarding) by adding rules.
 
 To save a container to be used as an image
 
