@@ -13,9 +13,9 @@ Download files in a directory of your choice to build Docker image and make sure
 Run the following command 
 
     2a. cd SpliciousBKND
-    2b. docker build -t SpliciousBKENDImage . 
+    2b. docker build -t spliciousbkendimage . 
 
-  If step 2b failed for some reason, try to run (docker build .) and make a note of the Image ID and follow either manual or automated process step 3a
+  Use "spliciousbkendimage" as image name in subsequent steps where image id is required. You can use any image name but it must be all lowercase. If step 2b failed for some reason, try to run (docker build .) and make a note of the Image ID and follow either manual or automated process step 3a
  
 ## Run docker image - manual process: 
 
