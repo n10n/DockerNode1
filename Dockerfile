@@ -9,16 +9,16 @@ ENV S_DIR $W_DIR/splicious
 ENV S_CMD splicious.sh
 ENV MONGODB_HOST 127.0.0.1
 ENV MONGODB_PORT 27017
-COPY splicious.sh $W_DIR/$S_CMD
+COPY splicious.sh $W_DIR/
 WORKDIR $W_DIR
-ADD agentui.tar.gz $W_DIR
-COPY entrypoint.sh $W_DIR
+ADD agentui.tar.gz $W_DIR/
+COPY entrypoint.sh $W_DIR/
 
 # Install OpenJDK 8, Maven and other software
 RUN \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/main >> /etc/apk/repositories && \
     echo http://dl-4.alpinelinux.org/alpine/v3.3/community>> /etc/apk/repositories && \
-    apk --update add openjdk8 automake autoconf bash gcc git libc-dev imake ncurses-dev openjdk8 openssh && \
+    apk --update add openjdk8 automake autoconf bash gcc git libc-dev imake ncurses-dev openjdk8 openssh-client && \
     wget http://apache.claz.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz -O \
          /usr/lib/apache-maven-3.3.9-bin.tar.gz && \
     cd /usr/lib/ && \
@@ -51,12 +51,15 @@ RUN \
 #    echo CLASSPATH=\`find lib -name "*.jar" -exec echo -n {}: \\\;\`lib\/ >$S_DIR/run.sh && \
 #    echo java -cp \$CLASSPATH com.biosimilarity.evaluator.spray.Boot -unchecked -deprecation -encoding utf8 -usejavacp >> zexe/run.sh && \
     echo java -cp \"lib/*\" com.biosimilarity.evaluator.spray.Boot >> $S_DIR/run.sh && \
-    chmod 755 $S_DIR/run.sh && \
+    \
     cp $W_DIR/GLoSEval/eval.conf $S_DIR/ && \
     cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
     mv $W_DIR/agentui $S_DIR/ && \
     mv $W_DIR/$S_CMD $S_DIR/ && \
-    chmod 755 $S_DIR/$S_CMD && \
+    \
+    chmod 755 $S_DIR/run.sh && \
+    chmod 755 $S_DIR/splicious.sh && \
+    chmod 755 $W_DIR/entrypoint.sh && \
     \
     cp $W_DIR/GLoSEval/src/main/resources/media/queenbee64.txt $S_DIR/src/main/resources/media  && \
     rm $S_DIR/lib/casbah*5.1*.jar && \
@@ -71,4 +74,4 @@ WORKDIR $S_DIR
      
 EXPOSE 9876
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
-CMD [ $S_DIR/$S_CMD start ]
+CMD [ "/usr/local/splicious/splicious.sh start" ]
