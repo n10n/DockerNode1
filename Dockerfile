@@ -4,6 +4,13 @@ FROM alpine:3.3
 LABEL description="Synereo Docker Image Beta" version="0.1.0"
 MAINTAINER N<ns68751+n10n@gmail.com>
 
+ENV DSLSERVER 127.0.0.1
+ENV DSLPORT 5672
+ENV DSLEPSSERVER 127.0.0.1
+ENV DSLEPSPORT 5672
+ENV BFCLSERVER 127.0.0.1
+ENV BFCLPORT 5672
+
 ENV W_DIR /usr/local
 ENV S_DIR $W_DIR/splicious
 ENV S_CMD splicious.sh
