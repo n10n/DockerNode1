@@ -81,4 +81,5 @@ WORKDIR $S_DIR
      
 EXPOSE 9876
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
-CMD [ "/usr/local/splicious/splicious.sh start" ]
+#CMD [ "/usr/local/splicious/splicious.sh start" ]
+CMD [ "/usr/local/splicious/run.sh" ]
