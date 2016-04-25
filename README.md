@@ -1,8 +1,12 @@
-## Prerequisite
+# Synereo Dockerfiles
+
+Dockerfiles for easily setting up a Synereo node.
+
+## Prerequisites
   - git client installed and git command in path
-  - docker installed (https://www.docker.com/) and running (start Docker Quick Terminal and make a note of the IP address assigned and for example default IP address is 192.168.99.100)
+  - docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On Linuxes with modern kernels, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker)
   - mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version
-  - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/)
+  - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/) but works with the latest version by editing rabbitmq.config file (add this entry [{rabbit, [{loopback_users, []}]}] )
 
 ## Source files
 Download files in a directory of your choice to build Docker image and make sure docker is running and available: 
@@ -30,7 +34,7 @@ At the # command prompt
 
     3a. docker run -i -t -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 \
               --name SpliciousBKEND -p 8888:9876 [ImageIDFromBuildStep_2b] \
-              /usr/local/splicious/splicious.sh start
+              /usr/local/splicious/run.sh
   
 Please replace the IP_ADDRESS appropriately. To see log files, go to /usr/local/splicious/logs folder.
 
@@ -42,6 +46,11 @@ See screenshot
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
 
 ## Other notes:
+
+Running with MongoDB as a linked node - follow the commands below (assuming mongo image is already installed) :
+
+    docker run -it --name mdb1 -p 27017:27017 -d mongo
+    docker run --name snode2 --link mdb1:mongo -e MONGODB_HOST=<Replace_192.168.99.100> -e MONGODB_PORT=27017  -p 8888:9876 -it spliciousbkendimage /bin/bash
 
 To access UI from outside of the docker host, you would need to map the dockerhost ip/port to docker guest ip/port in Virtual Box (Network -> Port Forwarding) by adding rules.
 
@@ -56,3 +65,5 @@ To save an image to use in different docker installation
 To load an image created in different docker installation 
 
     docker load < [image_name].tar
+
+Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide "guest" user access. This file mostly will be non existent and read more about access control [here](https://www.rabbitmq.com/access-control.html)
