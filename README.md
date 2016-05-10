@@ -4,7 +4,7 @@ Please visit for the latest version: https://github.com/synereo/dockernode
 
 ## Backend Dockerfile
 
-Dockerfiles for easily setting up a node and the following instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). 
+Dockerfile for easily setting up a node and the instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). These instruction are valid for first time use and once docker images are created and working then use `docker start ...` commands.
 
 ## Prerequisites
  * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On modern linux kernel based system, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker). If want to use existing Docker image (preferred method) then use the image from Docker hub then jump to 'Running' section below. 
