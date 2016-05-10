@@ -80,7 +80,7 @@ After updating ip addresses, run the following command in a sequence:
   ```
 ## Accessing container:
 
-Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using `http://192.168.99.100:8888/agentui/agentui.html?demo=false`
+Visit the webpage `http://<docker_IP>:8888/agentui/agentui.html?demo=false` and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false
 
 The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass`.
 
