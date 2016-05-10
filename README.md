@@ -9,13 +9,20 @@ Dockerfiles for easily setting up a Synereo node and the following instruction a
   [https://hub.docker.com/r/livelygig/backend/](https://hub.docker.com/r/livelygig/backend/)
 
 ## Prerequisites
-  - git client installed and git command in path
+  * git client installed and git command in path
   - docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On Linuxes with modern kernels, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker)
-  - mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image.
-  - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/) but works with the latest version by editing rabbitmq.config file (add this entry [{rabbit, [{loopback_users, []}]}] ). Follow the intruction below if want to run Docker image. (https://hub.docker.com/_/rabbitmq/) 
+  - mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. 
+  
+    `docker pull mongo`
 
-     docker pull rabbitmq
-     docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq
+    `docker run --name mdb1 -p 27017:27017 -d mongo`
+  
+  - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/) but works with the latest version by editing rabbitmq.config file (add this entry [{rabbit, [{loopback\_users, []}]}] ). Follow the intruction below if want to run Docker image. (https://hub.docker.com/_/rabbitmq/) 
+
+    `docker pull rabbitmq`
+    
+    `docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq`
+
 
 ## Source files
 Download files in a directory of your choice or use command as below to build Docker image (make sure docker is running and available). Windows users, run "git config --global core.autocrlf false" command before running the git clone command otherwise container may fail to execute properly.
@@ -46,7 +53,7 @@ Please replace the IP_ADDRESS appropriately.
               --name SpliciousBKEND -p 8888:9876 -d spliciousbkendimage \
               /usr/local/splicious/run.sh
   
-To see log files, go to /usr/local/splicious/logs folder.
+To see log files, go to /usr/local/splicious/logs folder after login in.
 
 ## Accessing container:
 
@@ -59,8 +66,7 @@ https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
 
 ## Running MongoDB:
 
-    docker pull mongo
-    docker run --name mdb1 -p 27017:27017 -d mongo
+
     
 ## Running RabbitMQ:
 
@@ -69,32 +75,17 @@ https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
 
 
 ## Running a complete node (including MongoDB and RabbitMQ)
-Copy eval.conf file (https://github.com/synereo/gloseval/blob/1.0/eval.conf) into a host folder and would map this folder while running the Docker image. Update the following keys/values in eval.conf file:
+Copy eval.conf file (https://github.com/synereo/gloseval/blob/1.0/eval.conf) into a Docker host folder and will map this folder later on. Update the following keys/values in eval.conf file appropirately:
 
-- Remote RabbitMQ Node Ip Address:
+- Update with remote RabbitMQ node IP Address: `DSLCommLinkServerHost`, `DSLEvaluatorPreferredSupplierHost` and  `BFactoryCommLinkServerHost`
 
--- DSLCommLinkServerHost
--- DSLEvaluatorPreferredSupplierHost
--- BFactoryCommLinkServerHost
+- Update with local RabbitMQ IP Address: `DSLCommLinkClientHost`, `DSLEvaluatorHost`, `DSLEvaluatorPreferredSupplierHost` and `BFactoryCommLinkClientHost`
 
-- Local RabbitMQ Ip Address:
-
--- DSLCommLinkClientHost
--- DSLEvaluatorHost
--- DSLEvaluatorPreferredSupplierHost
--- BFactoryCommLinkClientHost
-
-
-
+After updating ip addresses, run the following command in a sequence: 
 
     docker run -it --name mdb1 -p 27017:27017 -d 
     docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq 
-    docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v /Users/n/tmp/dockerspliciousconfig:/usr/local/splicious/config -e MONGODB_HOST=192.168.99.100 -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode livelygig/backend /usr/local/splicious/run.sh
-
-On docker contain prompt # run the following commands
-
-    cd /usr/local/splicious
-    ./run.sh start
+    docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v /Users/n/tmp/dockerspliciousconfig:/usr/local/splicious/config -e MONGODB_HOST=192.168.99.100 -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode -d livelygig/backend /usr/local/splicious/run.sh
 
 ## Other notes:
 To access UI from outside of the docker host, you would need to map the dockerhost ip/port to docker guest ip/port in Virtual Box (Network -> Port Forwarding) by adding rules.
@@ -111,5 +102,5 @@ To load an image created in different docker installation
 
     docker load < [image_name].tar
 
-Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide "guest" user access. This file mostly will be non existent and read more about access control [here](https://www.rabbitmq.com/access-control.html)
+Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide "guest" user access. This file mostly will be non existent and read more about RabbitMQ access control [here](https://www.rabbitmq.com/access-control.html)
 
