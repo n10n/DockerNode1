@@ -2,22 +2,23 @@
 
 Please visit for the latest version: https://github.com/synereo/dockernode
 
-## Synereo Backend Dockerfiles
+## Backend Dockerfiles
 
-Dockerfiles for easily setting up a Synereo node and the following instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). If want to use existing Docker image (preferred method) then use the image from Docker hub. 
-
-  [https://hub.docker.com/r/livelygig/backend/](https://hub.docker.com/r/livelygig/backend/)
-  
-MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node.
+Dockerfiles for easily setting up a node and the following instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). 
 
 ## Prerequisites
 
-  * git client installed and git command in path
-  * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On Linuxes with modern kernels, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker)
+  * git client installed and git command in path if want to build the node from scratch otherwise use Docker image
   * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. 
 
     `docker pull mongo` then 
     `docker run --name mdb1 -p 27017:27017 -d mongo`
+  * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On Linuxes with modern kernels, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker). If want to use existing Docker image (preferred method) then use the image from Docker hub then jump to 'Running' section below. 
+
+  [https://hub.docker.com/r/livelygig/backend/](https://hub.docker.com/r/livelygig/backend/)
+  
+  MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node.
+  
   - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/) but works with the latest version by editing rabbitmq.config file (add this entry [{rabbit, [{loopback\_users, []}]}] ). Follow the intruction below if want to run Docker image. (https://hub.docker.com/_/rabbitmq/) 
 
     `docker pull rabbitmq` then 
