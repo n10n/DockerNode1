@@ -68,12 +68,19 @@ After updating ip addresses, run the following command in a sequence:
     docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v <Mapped_Folder_WITH_EVAL.CONF>:/usr/local/splicious/config -e MONGODB_HOST=<IP_ADDRESS> -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode -d livelygig/backend /usr/local/splicious/run.sh
   
   For example:
-  
-  `docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v /Users/n/tmp/dockerspliciousconfig>:/usr/local/splicious/config -e MONGODB_HOST=192.168.99.100 -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode -d livelygig/backend /usr/local/splicious/run.sh`
-
+  ```
+  docker run -it --link mdb1:mongo \
+                 --link rabbitmq1:rabbitmq \
+                 -v /Users/n/tmp/dockerspliciousconfig>:/usr/local/splicious/config \
+                 -e MONGODB_HOST=192.168.99.100 \
+                 -e MONGODB_PORT=27017 \
+                 -e DEPLOYMENT_MODE=distributed \
+                 -p 8888:9876 --name backendNode \
+                 -d livelygig/backend /usr/local/splicious/run.sh`
+  ```
 ## Accessing container:
 
-Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false
+Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using `http://192.168.99.100:8888/agentui/agentui.html?demo=false`
 
 The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass`.
 
