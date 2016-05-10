@@ -13,8 +13,8 @@ Dockerfiles for easily setting up a node and the following instruction are for b
   
   MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node.
   
- * git client installed and git command in path if want to build the node from scratch otherwise use Docker image
- * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. 
+ * git client installed and git command in path if want to build the node from scratch otherwise use Docker image (preferred method)
+ * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. Importing old MongoDB database dump is not advisable.
 
     `docker pull mongo` then 
     `docker run --name mdb1 -p 27017:27017 -d mongo`
@@ -105,4 +105,4 @@ To load an image created in different docker installation
 
     docker load < [image_name].tar
 
-Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide 'guest' user access. This file mostly will be non existent and read more about RabbitMQ access control [here](https://www.rabbitmq.com/access-control.html)and Docker image has 'guest' access enabled by default.
+Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback\_users, []}]}] to provide 'guest' user access. This file mostly will be non existent and read more about RabbitMQ access control [here](https://www.rabbitmq.com/access-control.html)and Docker image has 'guest' access enabled by default.
