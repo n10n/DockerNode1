@@ -7,7 +7,7 @@ Please visit for the latest version: https://github.com/synereo/dockernode
 Dockerfiles for easily setting up a node and the following instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). 
 
 ## Prerequisites
- * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On Linuxes with modern kernels, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker). If want to use existing Docker image (preferred method) then use the image from Docker hub then jump to 'Running' section below. 
+ * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On modern linux kernel based system, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker). If want to use existing Docker image (preferred method) then use the image from Docker hub then jump to 'Running' section below. 
 
   [https://hub.docker.com/r/livelygig/backend/](https://hub.docker.com/r/livelygig/backend/)
   
@@ -106,4 +106,3 @@ To load an image created in different docker installation
     docker load < [image_name].tar
 
 Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide 'guest' user access. This file mostly will be non existent and read more about RabbitMQ access control [here](https://www.rabbitmq.com/access-control.html)and Docker image has 'guest' access enabled by default.
-
