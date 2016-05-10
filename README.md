@@ -96,7 +96,7 @@ To save a container to be used as an image
 
     docker commit [container_id] [name_in_lowercase]
 
-To save an image to use in different docker installation
+To save an image to use in different docker installation or publish into Docker Hub (https://hub.docker.com/). For that, please follow the instruction at https://docs.docker.com/docker-hub/repos/.
 
     docker save [name_in_lowercase] > [directory_location_to_save]/[image_name].tar
 
@@ -104,5 +104,5 @@ To load an image created in different docker installation
 
     docker load < [image_name].tar
 
-Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide "guest" user access. This file mostly will be non existent and read more about RabbitMQ access control [here](https://www.rabbitmq.com/access-control.html)
+Running with the latest RabbitMQ version - edit rabbitmq.config file by adding [{rabbit, [{loopback_users, []}]}] to provide 'guest' user access. This file mostly will be non existent and read more about RabbitMQ access control [here](https://www.rabbitmq.com/access-control.html)and Docker image has 'guest' access enabled by default.
 
