@@ -2,7 +2,7 @@
 
 Please visit for the latest version: https://github.com/synereo/dockernode
 
-## Backend Dockerfiles
+## Backend Dockerfile
 
 Dockerfiles for easily setting up a node and the following instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). 
 
@@ -30,7 +30,7 @@ Download files in a directory of your choice or use command as below to build Do
     1. git clone https://github.com/synereo/dockernode.git SpliciousBKND
 
 ## Build docker image using: 
-Run the following command 
+Run the following commands
 
     2a. cd SpliciousBKND
     2b. docker build -t spliciousbkendimage . 
@@ -43,9 +43,9 @@ Standalone mode requires running MongoDB and please replace the IP_ADDRESS appro
 #### Running docker image - manual process: 
 
     3a. docker run -it -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 \
-                   --name SpliciousBKEND -p 8888:9876 spliciousbkendimage /bin/bash
+                   --name backendNode -p 8888:9876 spliciousbkendimage /bin/bash
   
-At the # command prompt
+At the # command prompt, run the commands below
     
     3b. cd /usr/local/splicious
     3c. ./run.sh
@@ -53,7 +53,7 @@ At the # command prompt
 #### Running docker image - automated process: 
 
     3a. docker run -it -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 \
-                   --name SpliciousBKEND -p 8888:9876 -d spliciousbkendimage /usr/local/splicious/run.sh
+                   --name backendNode -p 8888:9876 -d spliciousbkendimage /usr/local/splicious/run.sh
 
 ## Running a full node:
 A full  node requires both MongoDB and RabbitMQ. Please replace the IP_ADDRESS appropriately for MongoDB. Copy eval.conf file (https://github.com/synereo/gloseval/blob/1.0/eval.conf) into a Docker host folder and will map this folder later on. Update the following keys/values in eval.conf file appropirately:
@@ -81,7 +81,7 @@ After updating ip addresses, run the following command in a sequence:
   ```
 ## Accessing container:
 
-Visit the webpage `http://<docker_IP>:8888/agentui/agentui.html?demo=false` and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false
+Visit the webpage `http://<docker_IP>:8888/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8888 then access the backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false URL
 
 The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass`.
 
