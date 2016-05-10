@@ -13,6 +13,7 @@ Dockerfiles for easily setting up a Synereo node and the following instruction a
   * git client installed and git command in path
   * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On Linuxes with modern kernels, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker)
   * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. 
+
     `docker pull mongo`
     `docker run --name mdb1 -p 27017:27017 -d mongo`
   - rabbitmq running version: 3.0.2 erlang version : 5.9.1 (15B03) (http://www.rabbitmq.com/) but works with the latest version by editing rabbitmq.config file (add this entry [{rabbit, [{loopback\_users, []}]}] ). Follow the intruction below if want to run Docker image. (https://hub.docker.com/_/rabbitmq/) 
