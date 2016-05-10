@@ -36,7 +36,9 @@ Run the following command
 
   Use "spliciousbkendimage" as image name in subsequent steps where image id is required. You can use image name of your choice but it must be all lowercase. 
  
-## Running docker image - manual process: 
+## Running standalone node:
+
+#### Running docker image - manual process: 
 
     3a. docker run -it -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 --name SpliciousBKEND -p 8888:9876 spliciousbkendimage /bin/bash
   
@@ -45,35 +47,14 @@ At the # command prompt
     3b. cd /usr/local/splicious
     3c. ./run.sh start
   
-## Running docker image - automated process: 
+#### Running docker image - automated process: 
 Please replace the IP_ADDRESS appropriately.
 
     3a. docker run -it -e MONGODB_HOST=IP_ADDRESS -e MONGODB_PORT=27017 \
               --name SpliciousBKEND -p 8888:9876 -d spliciousbkendimage \
               /usr/local/splicious/run.sh
-  
-To see log files, go to /usr/local/splicious/logs folder after login in.
 
-## Accessing container:
-
-Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false
-
-The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file
-
-See screenshot 
-https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
-
-## Running MongoDB:
-
-
-    
-## Running RabbitMQ:
-
-     docker pull rabbitmq
-     docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq
-
-
-## Running a complete node (including MongoDB and RabbitMQ)
+## Running a full node (including MongoDB and RabbitMQ)
 Copy eval.conf file (https://github.com/synereo/gloseval/blob/1.0/eval.conf) into a Docker host folder and will map this folder later on. Update the following keys/values in eval.conf file appropirately:
 
 - Update with remote RabbitMQ node IP Address: `DSLCommLinkServerHost`, `DSLEvaluatorPreferredSupplierHost` and  `BFactoryCommLinkServerHost`
@@ -85,6 +66,17 @@ After updating ip addresses, run the following command in a sequence:
     docker run -it --name mdb1 -p 27017:27017 -d 
     docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq 
     docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v /Users/n/tmp/dockerspliciousconfig:/usr/local/splicious/config -e MONGODB_HOST=192.168.99.100 -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode -d livelygig/backend /usr/local/splicious/run.sh
+  
+## Accessing container:
+
+Visit the webpage http://<docker_quick_terminal_assigned_IP>:8888/agentui/agentui.html?demo=false and if this don't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. SpliciousBKEND). For example, you may see the access URL like 192.168.99.100:8888 then access backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false
+
+The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file
+
+See screenshot 
+https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
+
+To see log files, go to /usr/local/splicious/logs folder after login into the container.
 
 ## Other notes:
 To access UI from outside of the docker host, you would need to map the dockerhost ip/port to docker guest ip/port in Virtual Box (Network -> Port Forwarding) by adding rules.
