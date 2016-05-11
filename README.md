@@ -4,17 +4,17 @@ Please visit for the latest version: https://github.com/synereo/dockernode
 
 ## Backend Dockerfile
 
-Dockerfile for easily setting up a node and the instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). These instruction are valid for first time use and once docker images are created and working then use `docker start ...` command.
+Dockerfile for easily setting up a node and the instruction are for building backend from the source code (This takes sometime to build i.e. around 30-40 minutes). These instruction are valid for first time use and once docker images are created and working then use `docker start ...` command. This build image contains older version of UI (i.e. Splicious UI) and newer version of Synnero UI is not yet ready for distritbution.
 
 ## Prerequisites
- * docker installed (https://www.docker.com/) and running (start Docker Quick Terminal. Make a note of the default IP address assigned when starting up Docker and for example, default IP address may be 192.168.99.100). Using  [Kitematic](https://docs.docker.com/kitematic/) is very helpful. On modern linux kernel based system, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker). If want to use existing Docker image (preferred method) then use the image from Docker hub then jump to 'Running' section below. 
+ * Basic knowledge of Docker. Docker installed (https://www.docker.com/) and running Docker process. Using  [Kitematic](https://docs.docker.com/kitematic/) to start the docker process is very helpful and advisable if using Windows or Mac. On modern linux kernel based system, such as Arch Linux, you can just use plain [Docker](https://wiki.archlinux.org/index.php/Docker). Make a note of assigned IP address when starting up Docker and for example, in Windows and Mac, assigned IP address is 192.168.99.100. If want to use existing Docker image (preferred method) then use the image from Docker hub then jump to 'Running' section below. 
 
   [https://hub.docker.com/r/livelygig/backend/](https://hub.docker.com/r/livelygig/backend/)
   
-  MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node.
+  MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node. 
   
  * git client installed and git command in path if want to build the node from scratch otherwise use Docker image (preferred method)
- * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. Importing old MongoDB database dump is not advisable.
+ * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. Importing old MongoDB database dump from different node is not advisable.
 
     `docker pull mongo` then 
     `docker run --name mdb1 -p 27017:27017 -d mongo`
@@ -38,7 +38,7 @@ Run the following commands
   Use "spliciousbkendimage" as image name in subsequent steps where image id is required. You can use image name of your choice but it must be all lowercase. 
  
 ## Running standalone node:
-Standalone mode requires running MongoDB and please replace the IP_ADDRESS appropriately below.
+Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac) appropriately below.
 
 #### Running docker image - manual process: 
 
@@ -56,7 +56,7 @@ At the # command prompt, run the commands below
                    --name backendNode -p 8888:9876 -d spliciousbkendimage /usr/local/splicious/run.sh
 
 ## Running a full node:
-A full  node requires both MongoDB and RabbitMQ. Please replace the IP_ADDRESS appropriately for MongoDB. Copy eval.conf file (https://github.com/synereo/gloseval/blob/1.0/eval.conf) into a Docker host folder and will map this folder later on. Update the following keys/values in eval.conf file appropirately:
+A full  node requires both MongoDB and RabbitMQ. It is advisable to use standalone mode for first time and then switch to full node. Please replace the IP_ADDRESS appropriately for MongoDB. Copy eval.conf file (https://github.com/synereo/gloseval/blob/1.0/eval.conf) into a Docker host folder and will map this folder later on. Update the following key/value pair in eval.conf file appropirately:
 
 - Update with remote RabbitMQ node IP Address: `DSLCommLinkServerHost`, `DSLEvaluatorPreferredSupplierHost` and  `BFactoryCommLinkServerHost`
 
@@ -64,9 +64,9 @@ A full  node requires both MongoDB and RabbitMQ. Please replace the IP_ADDRESS a
 
 After updating ip addresses, run the following command in a sequence: 
 
-    docker run -it --name mdb1 -p 27017:27017 -d 
-    docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq 
-    docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v <Mapped_Folder_WITH_EVAL.CONF>:/usr/local/splicious/config -e MONGODB_HOST=<IP_ADDRESS> -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode -d livelygig/backend /usr/local/splicious/run.sh
+    - docker run -it --name mdb1 -p 27017:27017 -d 
+    - docker run --name rabbitmq1 -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 -d rabbitmq 
+    - docker run -it --link mdb1:mongo --link rabbitmq1:rabbitmq -v <Mapped_Folder_WITH_EVAL.CONF>:/usr/local/splicious/config -e MONGODB_HOST=<IP_ADDRESS> -e MONGODB_PORT=27017 -e DEPLOYMENT_MODE=distributed -p 8888:9876 --name backendNode -d livelygig/backend /usr/local/splicious/run.sh
   
   For example:
   ```
@@ -94,7 +94,7 @@ The default user name/password is admin@localhost/a and can be changed in /usr/l
                  -e MONGODB_PORT=27017 \
                  -e DEPLOYMENT_MODE=distributed \
                  -p 8888:9876 --name backendNode \
-                 -d livelygig/backend /usr/local/splicious/run.sh`
+                 -d livelygig/backend /usr/local/splicious/run.sh
   ```
 See screenshot 
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
@@ -102,6 +102,16 @@ https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
 To see log files, go to /usr/local/splicious/logs folder after login into the container.
 
 ## Other notes:
+
+For some reason, the data gets corrupted then, starting a new container is the best way. Windows and Mac don't support mapping of external folder for data and config in MongoDB's Docker image. If using non Docker MongoDB, then the easiest way to reset database is by following the steps below:
+
+    Stop backend node
+    Stop MongoDB be process by running  (one way doing is by running - mongo 127.0.0.1/admin --eval "db.shutdownServer()")
+    Rename "db directory" (defined in configuration file)
+    Create "db directory"
+    Start MongoDB process
+    Start backend node
+
 To access UI from outside of the docker host, you would need to map the docker host ip/port to docker guest ip/port in Virtual Box (Network -> Port Forwarding) by adding rules.
 
 To save a container to be used as an image
