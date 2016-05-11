@@ -89,7 +89,7 @@ The default user name/password is admin@localhost/a and can be changed in /usr/l
                  --link rabbitmq1:rabbitmq \
                  -v /Users/n/tmp/dockerspliciousconfig>:/usr/local/splicious/config \
                  -e NODEADMINEMAIL=runforfun@localhost \
-                 -e NODEADMINPASS=FunIsOverRated \
+                 -e NODEADMINPASS=FunNeverEnds2016 \
                  -e MONGODB_HOST=192.168.99.100 \
                  -e MONGODB_PORT=27017 \
                  -e DEPLOYMENT_MODE=distributed \
