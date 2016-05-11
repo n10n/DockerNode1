@@ -83,8 +83,19 @@ After updating ip addresses, run the following command in a sequence:
 
 Visit the webpage `http://<docker_IP>:8888/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8888 then access the backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false URL
 
-The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass`.
-
+The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass` or add NODEADMINEMAIL and NODEADMINPASS to docker run command. For example:
+  ```
+  docker run -it --link mdb1:mongo \
+                 --link rabbitmq1:rabbitmq \
+                 -v /Users/n/tmp/dockerspliciousconfig>:/usr/local/splicious/config \
+                 -e NODEADMINEMAIL=runforfun@localhost \
+                 -e NODEADMINPASS=FunIsOverRated \
+                 -e MONGODB_HOST=192.168.99.100 \
+                 -e MONGODB_PORT=27017 \
+                 -e DEPLOYMENT_MODE=distributed \
+                 -p 8888:9876 --name backendNode \
+                 -d livelygig/backend /usr/local/splicious/run.sh`
+  ```
 See screenshot 
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk
 
