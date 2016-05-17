@@ -17,14 +17,13 @@ RUN \
     tar -xzvf apache-maven-3.3.9-bin.tar.gz && \
     tar -xzvf sbt-0.13.11.tgz && \
     \
+    cd /usr/bin && \
     ln -s ../lib/jvm/java-1.8-openjdk/bin/javac /usr/bin/javac && \
     ln -s ../lib/jvm/java-1.8-openjdk/bin/jar /usr/bin/jar && \
     ln -s ../lib/apache-maven-3.3.9/bin/mvn /usr/bin/mvn && \
-    ln -s ../lib/sbt/bin/sbt sbt && \
+    ln -s ../lib/sbt/bin/sbt /usr/bin/sbt && \
     \
-    rm -rf /var/cache/apk/* && \
-    rm -f apache-maven-3.3.9-bin.tar.gz && \
-    rm -f sbt-0.13.11.tgz && \
+    rm -rf /var/cache/apk/* apache-maven-3.3.9-bin.tar.gz sbt-0.13.11.tgz \
     \
 #EXPOSE 
 #ENTRYPOINT ["/usr/local/entrypoint.sh"]
