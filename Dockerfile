@@ -23,8 +23,8 @@ RUN \
     ln -s ../lib/apache-maven-3.3.9/bin/mvn /usr/bin/mvn && \
     ln -s ../lib/sbt/bin/sbt /usr/bin/sbt && \
     \
-    rm -rf /var/cache/apk/* apache-maven-3.3.9-bin.tar.gz sbt-0.13.11.tgz \
+    rm -rf /var/cache/apk/* /usr/lib/apache-maven-3.3.9-bin.tar.gz /usr/lib/sbt-0.13.11.tgz \
     \
 #EXPOSE 
 #ENTRYPOINT ["/usr/local/entrypoint.sh"]
-CMD [ "/bin/bash" ]
+#CMD [ "/bin/bash" ]
