@@ -63,9 +63,9 @@ S_DIR=$W_DIR/splicious
   cd $W_DIR/frontui/ && \
   \
 #  touch $W_DIR/frontui/runsui.sh && \
-  echo "bin/server -verbose -Dhttp.port=9000 -Dplay.crypto.secret=\"s3cr3t\" " >> $W_DIR/frontui/runsui.sh && \
+  echo "bin/server -verbose -Dhttp.port=9000 -Dplay.crypto.secret=\"s3cr3t\" " >> $W_DIR/frontui/runf.sh && \
   \
-  chmod -v 755 $W_DIR/frontui/runsui.sh && \
+  chmod -v 755 $W_DIR/frontui/runf.sh && \
 
 ## reduce size
   rm -rf $W_DIR/GLoSEval/target && \
@@ -80,6 +80,6 @@ S_DIR=$W_DIR/splicious
   rm -rf $W_DIR/frontuic/project/target && \
   rm -rf $W_DIR/frontuic/project/project/target && \
   rm -rf $W_DIR/frontuic/server/target && \
-  rm -rf /root/.m2 /root/.sbt /root/.ivy2 /root/.zinc && \
+#  rm -rf /root/.m2 /root/.sbt /root/.ivy2 /root/.zinc && \
 echo " deploy.sh is exiting.......$?"
 exit $?
