@@ -42,7 +42,7 @@ S_DIR=$W_DIR/splicious
   echo java -cp \"lib/*\" com.biosimilarity.evaluator.spray.Boot >> $S_DIR/runb.sh && \
   \
   cp $W_DIR/GLoSEval/eval.conf $S_DIR/config/ && \
-  cp $W_DIR/GLoSEval/scripts $S_DIR/ && \
+  cp -rP $W_DIR/GLoSEval/scripts $S_DIR/ && \
   cd $S_DIR && \
   ln -s config/eval.conf eval.conf && \
   cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
@@ -69,6 +69,7 @@ S_DIR=$W_DIR/splicious
 
 ## reduce size
   rm -rf $W_DIR/GLoSEval/target && \
+  rm -rf $W_DIR/GLoSEval/project/target && \
   rm -rf $W_DIR/SpecialK/target && \
   rm -rf $W_DIR/agent-service-ati-ia/target && \
   rm -rf $W_DIR/agent-service-ati-ia/AgentServices-Store/target && \
