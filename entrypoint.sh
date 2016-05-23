@@ -26,7 +26,7 @@ UI_DIR=$W_DIR/frontui
 sed -i 's/baseURL: \"http:\/\/localhost:9876\/api\"/baseURL: \"http:\/\/'$API_HOST':'$API_PORT'\/api\"/' $UI_DIR/conf/application.conf
 
 #update running port
-sed -i 's/http.port=9000/http.port='$RUNF_PORT'/' $UI_DIR/runsui.sh
+sed -i 's/http.port=9000/http.port='$RUNF_PORT'/' $UI_DIR/runf.sh
 
 ## Backend
 #Node Admin
