@@ -19,7 +19,10 @@ LOGFILE=$WORKINGDIR/logs/$NAME-$DATE.log
 if [ ! -d $WORKINGDIR/logs ]; then
    mkdir $WORKINGDIR/logs
 fi
-
+#if [ "$#" -ne 1 ] ; then
+if [ $# -eq 0 ]; then
+  java -cp "lib/*" com.biosimilarity.evaluator.spray.Boot
+fi
 case "$1" in
     start)
         echo "Starting $DESC..."
@@ -61,5 +64,8 @@ case "$1" in
             echo "$DESC is not running"
         fi
     ;;
+    *)
+      echo "Usage: $0 start|stop|restart"
+   ;;
 esac
 exit $?
