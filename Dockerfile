@@ -23,10 +23,10 @@ ENV RUNB_PORT 9876
 ENV RUNF_PORT 9000
 ENV W_DIR /usr/local
 
+#ADD ivy2.tar.gz /root/
 #ADD m2.tar.gz /root/
 ADD m2scalaz210700.tar.gz /root/
 ADD m2cup-jlex-configgy-prolog-pickling.tar.gz /root/
-#ADD ivy2.tar.gz /root/
 #ADD sbt.tar.gz /root/
 COPY deploy.sh $W_DIR/
 COPY entrypoint.sh $W_DIR/
@@ -46,5 +46,5 @@ ADD scalabin.tar.gz $W_DIR/splicious
 WORKDIR $W_DIR
 EXPOSE 9876 9000 
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
-CMD [ "/usr/local/splicious/runb.sh" ]
-CMD [ "/usr/local/frontui/runf.sh" ]
+CMD [ "/usr/local/splicious/splicious.sh" ]
+CMD [ "/usr/local/frontui/frontui.sh" ]
