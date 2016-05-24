@@ -44,7 +44,7 @@ S_DIR=$W_DIR/splicious
   cp -rP $W_DIR/GLoSEval/scripts $S_DIR/ && \
   cd $S_DIR && \
   ln -s config/eval.conf eval.conf && \
-  cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
+  cp $W_DIR/GLoSEval/log.properties $S_DIR/lib/ && \
   \
   rm -rf /var/cache/apk/* && \
   rm -f $S_DIR/lib/junit-3.8.1.jar $S_DIR/lib/junit-4.7.jar && \
