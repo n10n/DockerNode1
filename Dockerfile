@@ -9,6 +9,8 @@ ENV NODEADMINPASS a
 
 ENV MONGODB_HOST 127.0.0.1
 ENV MONGODB_PORT 27017
+ENV API_HOST 127.0.0.1
+ENV API_PORT 9876
 ENV DEPLOYMENT_MODE colocated
 ENV DSLSERVER 127.0.0.1
 ENV DSLPORT 5672
@@ -29,10 +31,12 @@ ADD m2cup-jlex-configgy-prolog-pickling.tar.gz /root/
 COPY deploy.sh $W_DIR/
 COPY entrypoint.sh $W_DIR/
 COPY splicious.sh $W_DIR/splicious/
+COPY frontui.sh $W_DIR/frontui/
 
 RUN \
     cd $W_DIR \
     && chmod 755 $W_DIR/splicious/splicious.sh \
+    && chmod 755 $W_DIR/frontui/frontui.sh \
     && chmod 755 $W_DIR/entrypoint.sh \
     && ./deploy.sh
     
