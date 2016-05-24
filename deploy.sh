@@ -39,15 +39,12 @@ S_DIR=$W_DIR/splicious
   cp -rP $W_DIR/agent-service-ati-ia/AgentServices-Store/target/lib/* $S_DIR/lib/ && \
   cp -rP $W_DIR/GLoSEval/target/lib/* $S_DIR/lib/ && \
   cp -rP $W_DIR/GLoSEval/target/gloseval-0.1.jar $S_DIR/lib/ && \
-  echo java -cp \"lib/*\" com.biosimilarity.evaluator.spray.Boot >> $S_DIR/runb.sh && \
   \
   cp $W_DIR/GLoSEval/eval.conf $S_DIR/config/ && \
   cp -rP $W_DIR/GLoSEval/scripts $S_DIR/ && \
   cd $S_DIR && \
   ln -s config/eval.conf eval.conf && \
   cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
-  \
-  chmod 755 $S_DIR/runb.sh && \
   \
   rm -rf /var/cache/apk/* && \
   rm -f $S_DIR/lib/junit-3.8.1.jar $S_DIR/lib/junit-4.7.jar && \
@@ -56,16 +53,12 @@ S_DIR=$W_DIR/splicious
   rm -f /usr/local/splicious/bin/._* && \
   \
 ## New UI
-  mkdir -p $W_DIR/frontui && \
+#  mkdir -p $W_DIR/frontui && \
   cd $W_DIR/frontuic && \
   sbt -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
   mv $W_DIR/frontuic/server/target/universal/stage/* $W_DIR/frontui/ && \
   cd $W_DIR/frontui/ && \
   \
-#  touch $W_DIR/frontui/runsui.sh && \
-  echo "bin/server -verbose -Dhttp.port=9000 -Dplay.crypto.secret=\"s3cr3t\" " >> $W_DIR/frontui/runf.sh && \
-  \
-  chmod -v 755 $W_DIR/frontui/runf.sh && \
 
 ## reduce size
   rm -rf $W_DIR/GLoSEval/target && \
