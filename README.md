@@ -49,9 +49,10 @@ At the # prompt, run the commands below to run frontui
 At the # prompt, run the commands below to run backend
     
     3b. cd /usr/local/splicious
-    3c. ./run.sh &
+    3c. ./splicious.sh start
     
 ## Accessing container:
-
+```
 http://192.168.99.100:8888/agentui/agentui.html?demo=false
 http://192.168.99.100:80/
+```
