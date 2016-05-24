@@ -20,6 +20,11 @@ if [ ! -d $WORKINGDIR/logs ]; then
    mkdir $WORKINGDIR/logs
 fi
 
+#if [ "$#" -ne 1 ] ; then
+if [ $# -eq 0 ]; then
+  bin/server -verbose -Dhttp.port=9000 -Dplay.crypto.secret="s3cr3t"
+fi
+
 case "$1" in
     start)
         echo "Starting $DESC..."
@@ -60,5 +65,8 @@ case "$1" in
             echo "$DESC is not running"
         fi
     ;;
+   *)
+     echo "Usage: $0 start|stop|restart"
+   ;;
 esac
 exit $?
