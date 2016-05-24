@@ -35,8 +35,8 @@ sed -i 's/nodeAdminEmail = \"admin@localhost\"/nodeAdminEmail = \"'$NODEADMINEMA
 sed -i 's/nodeAdminPass = \"a\"/nodeAdminPass = \"'$NODEADMINPASS'\"/' $EVAL_FILE
 
 #MongdoDB
-sed -i 's/dbHost = \"127.0.0.1\"/dbHost = \"'$MONGODB_HOST'\"/' $EVAL_FILE
-sed -i 's/dbPort = \"27017\"/dbPort = \"'$MONGODB_PORT'\"/' $EVAL_FILE
+sed -i 's/dbHost = \"127.0.0.1\"/dbHost = \"'$DB_HOST'\"/' $EVAL_FILE
+sed -i 's/dbPort = \"27017\"/dbPort = \"'$DB_PORT'\"/' $EVAL_FILE
 
 #DeploymentMode
 sed -i 's/deploymentMode = \"colocated\"/deploymentMode = \"'$DEPLOYMENT_MODE'\"/' $EVAL_FILE
