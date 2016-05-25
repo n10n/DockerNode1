@@ -25,26 +25,17 @@ ENV W_DIR /usr/local
 
 #ADD ivy2.tar.gz /root/
 #ADD m2.tar.gz /root/
-ADD m2scalaz210700.tar.gz /root/
-ADD m2cup-jlex-configgy-prolog-pickling.tar.gz /root/
 #ADD sbt.tar.gz /root/
 COPY deploy.sh $W_DIR/
 COPY entrypoint.sh $W_DIR/
-COPY splicious.sh $W_DIR/splicious/
-COPY frontui.sh $W_DIR/frontui/
 
 RUN \
     cd $W_DIR \
-    && chmod 755 $W_DIR/splicious/splicious.sh \
-    && chmod 755 $W_DIR/frontui/frontui.sh \
     && chmod 755 $W_DIR/entrypoint.sh \
     && ./deploy.sh
-    
-ADD agentui.tar.gz $W_DIR/splicious
-ADD scalabin.tar.gz $W_DIR/splicious
-    
+
 WORKDIR $W_DIR
-EXPOSE 9876 9000 
+EXPOSE 80 8080 9876 9000
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
 CMD [ "/usr/local/splicious/splicious.sh" ]
 CMD [ "/usr/local/frontui/frontui.sh" ]
