@@ -12,7 +12,7 @@
 DESC="Frontui"
 NAME=frontui
 DATE=`date +%Y%m%d%H%M%S`
-WORKINGDIR=/usr/local/frontui
+WORKINGDIR=$W_DIR/frontui
 PIDFILE=$WORKINGDIR/logs/$NAME.pid
 LOGFILE=$WORKINGDIR/logs/$NAME-$DATE.log
 
