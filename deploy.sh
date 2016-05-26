@@ -1,18 +1,20 @@
 #W_DIR=$HOME/tmp
+#W_DIR=/usr/local
 S_DIR=$W_DIR/splicious
 DOC=0
 if [ 0 -eq $DOC ]; then
   if [ ! -f "$HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz" ]; then 
     wget https://github.com/n10n/DockerNode/raw/master/m2cup-jlex-configgy-prolog-pickling.tar.gz -O $HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz
+    tar -xzvf m2cup-jlex-configgy-prolog-pickling.tar.gz
   fi 
   if [ ! -f "$HOME/m2scalaz210700.tar.gz" ]; then
     wget https://github.com/n10n/DockerNode/raw/master/m2scalaz210700.tar.gz -O $HOME/m2scalaz210700.tar.gz
+    tar -xzvf m2scalaz210700.tar.gz
   fi 
-  cd $HOME/
-  tar -xzvf m2cup-jlex-configgy-prolog-pickling.tar.gz
-  tar -xzvf m2scalaz210700.tar.gz
 fi
-
+  \
+  mkdir -p $W_DIR/frontui $S_DIR/lib $S_DIR/logs $S_DIR/config && \
+  \
 ## engine    
   cd $W_DIR && \
   if [ ! -d "frontuic" ]; then
@@ -43,7 +45,6 @@ fi
   cd $W_DIR/GLoSEval && \
   mvn -e -fn -DskipTests=true install prepare-package && \
   \
-  mkdir -p $W_DIR/frontui $S_DIR/lib $S_DIR/logs $S_DIR/config && \
   cp -rP $W_DIR/SpecialK/target/lib/* $S_DIR/lib/ && \
   cp -rP $W_DIR/agent-service-ati-ia/AgentServices-Store/target/lib/* $S_DIR/lib/ && \
   cp -rP $W_DIR/GLoSEval/target/lib/* $S_DIR/lib/ && \
@@ -62,7 +63,6 @@ fi
   rm -f $S_DIR/bin/._* && \
   \
 ## New UI
-#  mkdir -p $W_DIR/frontui && \
   cd $W_DIR/frontuic && \
   sbt -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
   rm -rf $W_DIR/frontui/* && \
