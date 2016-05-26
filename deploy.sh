@@ -70,11 +70,11 @@ fi
   cd $W_DIR/ && \
   \
   if [ 0 -eq $DOC ]; then
-    if [ ! -f "$S_DIR/agentui.tar.gz" ]; then
+    if [ ! -d "$S_DIR/agentui" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/agentui.tar.gz -O $S_DIR/agentui.tar.gz
       cd $S_DIR ; tar -xzvf agentui.tar.gz ; rm -f agentui.tar.gz
     fi 
-    if [ ! -f "$S_DIR/scalabin.tar.gz" ]; then
+    if [ ! -f "$S_DIR/bin/scala" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/scalabin.tar.gz -O $S_DIR/scalabin.tar.gz
       cd $S_DIR ; tar -xzvf scalabin.tar.gz ; rm -f scalabin.tar.gz
     fi 
@@ -86,7 +86,7 @@ fi
     fi 
   fi
   cd $W_DIR/ && \
-  chmod 755 $S_DIR/splicious.sh $W_DIR/frontui/frontui.sh
+  chmod 755 $S_DIR/splicious.sh $S_DIR/splicious/bin/* $W_DIR/frontui/frontui.sh
 
 ## reduce size
 #  rm -rf $W_DIR/GLoSEval/target && \
