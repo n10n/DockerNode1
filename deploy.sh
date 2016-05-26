@@ -3,13 +3,15 @@
 S_DIR=$W_DIR/splicious
 DOC=0
 if [ 0 -eq $DOC ]; then
-  if [ ! -f "$HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz" ]; then 
+#  if [ ! -f "$HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz" ]; then 
+  if [ ! -d "$HOME/.m2/repository/net/lag/configgy" ]; then 
     wget https://github.com/n10n/DockerNode/raw/master/m2cup-jlex-configgy-prolog-pickling.tar.gz -O $HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz
-    tar -xzvf m2cup-jlex-configgy-prolog-pickling.tar.gz
+    cd $HOME ; tar -xzvf m2cup-jlex-configgy-prolog-pickling.tar.gz
   fi 
-  if [ ! -f "$HOME/m2scalaz210700.tar.gz" ]; then
+#  if [ ! -f "$HOME/m2scalaz210700.tar.gz" ]; then
+  if [ ! -d "$HOME/.m2/repository/org/scalaz/scalaz-core_2.10" ]; then
     wget https://github.com/n10n/DockerNode/raw/master/m2scalaz210700.tar.gz -O $HOME/m2scalaz210700.tar.gz
-    tar -xzvf m2scalaz210700.tar.gz
+    cd $HOME ; tar -xzvf m2scalaz210700.tar.gz
   fi 
 fi
   \
@@ -86,7 +88,7 @@ fi
     fi 
   fi
   cd $W_DIR/ && \
-  chmod 755 $S_DIR/splicious.sh $S_DIR/splicious/bin/* $W_DIR/frontui/frontui.sh
+  chmod 755 $S_DIR/splicious.sh $S_DIR/bin/* $W_DIR/frontui/frontui.sh
 
 ## reduce size
 #  rm -rf $W_DIR/GLoSEval/target && \
@@ -101,6 +103,6 @@ fi
 #  rm -rf $W_DIR/frontuic/project/target && \
 #  rm -rf $W_DIR/frontuic/project/project/target && \
 #  rm -rf $W_DIR/frontuic/server/target && \
-#  rm -rf /root/.m2 /root/.sbt /root/.ivy2 /root/.zinc && \
-echo " deploy.sh is exiting.......$?"
+#  rm -rf $HOME/.m2 $HOME/.sbt $HOME/.ivy2 $HOME/.zinc && \
+echo " deployer is exiting.......$?"
 exit $?
