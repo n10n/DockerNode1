@@ -1,4 +1,4 @@
-#W_DIR=$HOME/tmp
+#W_DIR=$HOME
 #W_DIR=/usr/local
 S_DIR=$W_DIR/splicious
 DOC=0
@@ -24,16 +24,19 @@ fi
   else 
     cd $W_DIR/frontuic ; git pull 
   fi
+  cd $W_DIR && \
   if [ ! -d "SpecialK" ]; then
     git clone -b 1.0 https://github.com/synereo/specialk.git SpecialK 
   else
     cd $W_DIR/SpecialK; git pull
   fi
+  cd $W_DIR && \
   if [ ! -d "agent-service-ati-ia" ]; then
     git clone -b 1.0 https://github.com/synereo/agent-service-ati-ia.git 
   else
     cd $W_DIR/agent-service-ati-ia; git pull 
   fi
+  cd $W_DIR && \
   if [ ! -d "GLoSEval" ]; then
     git clone -b 1.0 https://github.com/synereo/gloseval.git GLoSEval 
   else
