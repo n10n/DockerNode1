@@ -50,13 +50,13 @@ fi
   cd $W_DIR/GLoSEval && \
   mvn -e -fn -DskipTests=true install prepare-package && \
   \
-  cp -rP $W_DIR/SpecialK/target/lib/* $S_DIR/lib/ && \
-  cp -rP $W_DIR/agent-service-ati-ia/AgentServices-Store/target/lib/* $S_DIR/lib/ && \
-  cp -rP $W_DIR/GLoSEval/target/lib/* $S_DIR/lib/ && \
-  cp -rP $W_DIR/GLoSEval/target/gloseval-0.1.jar $S_DIR/lib/ && \
+  cp -rp $W_DIR/SpecialK/target/lib/* $S_DIR/lib/ && \
+  cp -rp $W_DIR/agent-service-ati-ia/AgentServices-Store/target/lib/* $S_DIR/lib/ && \
+  cp -rp $W_DIR/GLoSEval/target/lib/* $S_DIR/lib/ && \
+  cp -rp $W_DIR/GLoSEval/target/gloseval-0.1.jar $S_DIR/lib/ && \
   \
   cp $W_DIR/GLoSEval/eval.conf $S_DIR/config/ && \
-  cp -rP $W_DIR/GLoSEval/scripts $S_DIR/ && \
+  cp -rp $W_DIR/GLoSEval/scripts $S_DIR/ && \
   cd $S_DIR && \
   ln -fs config/eval.conf eval.conf && \
   cp $W_DIR/GLoSEval/log.properties $S_DIR/ && \
