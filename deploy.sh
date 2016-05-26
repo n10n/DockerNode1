@@ -66,7 +66,7 @@ fi
   cd $W_DIR/frontuic && \
   sbt -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
   rm -rf $W_DIR/frontui/* && \
-  mv -uf $W_DIR/frontuic/server/target/universal/stage/* $W_DIR/frontui/ && \
+  mv -f $W_DIR/frontuic/server/target/universal/stage/* $W_DIR/frontui/ && \
   cd $W_DIR/ && \
   \
   if [ 0 -eq $DOC ]; then
