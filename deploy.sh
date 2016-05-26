@@ -67,8 +67,10 @@ fi
 ## New UI
   cd $W_DIR/frontuic && \
   sbt -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
-  rm -rf $W_DIR/frontui/* && \
-  mv -f $W_DIR/frontuic/server/target/universal/stage/* $W_DIR/frontui/ && \
+  rm -rf $W_DIR/frontui/bin $W_DIR/frontui/conf $W_DIR/frontui/lib && \
+  cp -rfp $W_DIR/frontuic/server/target/universal/stage/bin $W_DIR/frontui/ && \
+  cp -rfp $W_DIR/frontuic/server/target/universal/stage/conf $W_DIR/frontui/ && \
+  cp -rfp $W_DIR/frontuic/server/target/universal/stage/lib $W_DIR/frontui/ && \
   cd $W_DIR/ && \
   \
   if [ 0 -eq $DOC ]; then
