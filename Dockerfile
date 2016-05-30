@@ -32,8 +32,9 @@ COPY entrypoint.sh $W_DIR/
 RUN \
     cd $W_DIR \
     && chmod 755 $W_DIR/entrypoint.sh \
-    && ./deploy.sh
-
+    && chmod 755 $W_DIR/deploy.sh \
+    && ./deploy.sh 
+    
 WORKDIR $W_DIR
 EXPOSE 80 8080 9876 9000
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
