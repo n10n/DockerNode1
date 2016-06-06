@@ -22,7 +22,7 @@ fi
 
 #if [ "$#" -ne 1 ] ; then
 if [ $# -eq 0 ]; then
-  bin/server -verbose -Dhttp.port=9000 -Dplay.crypto.secret="s3cr3t"
+  cd $WORKINGDIR ; bin/server -verbose -Dhttp.port=9000 -Dplay.crypto.secret="s3cr3t"
 fi
 
 case "$1" in
