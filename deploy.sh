@@ -6,12 +6,12 @@ if [ 0 -eq $DOC ]; then
 #  if [ ! -f "$HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz" ]; then 
   if [ ! -d "$HOME/.m2/repository/net/lag/configgy" ]; then 
     wget https://github.com/n10n/DockerNode/raw/master/m2cup-jlex-configgy-prolog-pickling.tar.gz -O $HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz
-    cd $HOME ; tar -xzvf m2cup-jlex-configgy-prolog-pickling.tar.gz
+    cd $HOME ; tar -xzvf m2cup-jlex-configgy-prolog-pickling.tar.gz; rm -f $HOME/m2cup-jlex-configgy-prolog-pickling.tar.gz
   fi 
 #  if [ ! -f "$HOME/m2scalaz210700.tar.gz" ]; then
   if [ ! -d "$HOME/.m2/repository/org/scalaz/scalaz-core_2.10" ]; then
     wget https://github.com/n10n/DockerNode/raw/master/m2scalaz210700.tar.gz -O $HOME/m2scalaz210700.tar.gz
-    cd $HOME ; tar -xzvf m2scalaz210700.tar.gz
+    cd $HOME ; tar -xzvf m2scalaz210700.tar.gz; rm -f $HOME/m2scalaz210700.tar.gz
   fi 
 fi
   \
