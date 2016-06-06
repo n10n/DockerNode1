@@ -36,7 +36,7 @@ RUN \
     && chmod 755 $W_DIR/deploy.sh \
     && chmod 755 $W_DIR/reducesize.sh \
     && ./deploy.sh \
-    && ./reducesize.sh
+#    && ./reducesize.sh
     
 WORKDIR $W_DIR
 EXPOSE 80 8080 9876 9000
