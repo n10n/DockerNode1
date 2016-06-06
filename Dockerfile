@@ -28,12 +28,15 @@ ENV W_DIR /usr/local
 #ADD sbt.tar.gz /root/
 COPY deploy.sh $W_DIR/
 COPY entrypoint.sh $W_DIR/
+COPY reducesize.sh $W_DIR/
 
 RUN \
     cd $W_DIR \
     && chmod 755 $W_DIR/entrypoint.sh \
     && chmod 755 $W_DIR/deploy.sh \
-    && ./deploy.sh 
+    && chmod 755 $W_DIR/reducesize.sh \
+    && ./deploy.sh \
+    && ./reducesize.sh
     
 WORKDIR $W_DIR
 EXPOSE 80 8080 9876 9000
