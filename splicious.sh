@@ -21,7 +21,7 @@ if [ ! -d $WORKINGDIR/logs ]; then
 fi
 #if [ "$#" -ne 1 ] ; then
 if [ $# -eq 0 ]; then
-  java -cp "lib/*" com.biosimilarity.evaluator.spray.Boot
+  cd $WORKINGDIR ; java -cp "lib/*" com.biosimilarity.evaluator.spray.Boot
 fi
 case "$1" in
     start)
