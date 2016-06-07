@@ -1,8 +1,17 @@
 # Set the base image
 FROM alpine:3.3
 
-LABEL description="Docker Base Image Required Software" version="0.1.0"
+LABEL description="Docker Base Image Required Software" version="0.2.0"
 MAINTAINER N<ns68751+n10n@gmail.com>
+
+ENV NODEADMINEMAIL admin@localhost
+ENV NODEADMINPASS a
+
+ENV DB_HOST 127.0.0.1
+ENV DB_PORT 27017
+ENV API_HOST 127.0.0.1
+ENV API_PORT 9876
+ENV W_DIR /usr/local
 
 # Install OpenJDK 8, Maven, SBT, NodeJS and other software
 RUN \
@@ -25,6 +34,7 @@ RUN \
     \
     rm -rf /var/cache/apk/* /usr/lib/apache-maven-3.3.9-bin.tar.gz /usr/lib/sbt-0.13.11.tgz \
     \
-#EXPOSE 
-#ENTRYPOINT ["/usr/local/entrypoint.sh"]
-#CMD [ "/bin/bash" ]
+EXPOSE 9876 9000
+ENTRYPOINT ["/usr/local/entrypoint.sh"]
+CMD [ "/usr/local/splicious/splicious.sh" ]
+CMD [ "/usr/local/frontui/frontui.sh" ]
