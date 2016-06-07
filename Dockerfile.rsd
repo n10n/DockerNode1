@@ -6,12 +6,14 @@ MAINTAINER N<ns68751+n10n@gmail.com>
 
 ENV NODEADMINEMAIL admin@localhost
 ENV NODEADMINPASS a
-
 ENV DB_HOST 127.0.0.1
 ENV DB_PORT 27017
 ENV API_HOST 127.0.0.1
 ENV API_PORT 9876
+
 ENV W_DIR /usr/local
+
+COPY entrypoint.sh.rsd $W_DIR/entrypoint.sh
 
 # Install OpenJDK 8, Maven, SBT, NodeJS and other software
 RUN \
