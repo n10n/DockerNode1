@@ -12,7 +12,7 @@ ENV DB_PORT 27017
 ENV W_DIR /usr/local
 
 COPY entrypoint.sh.rsd $W_DIR/entrypoint.sh
-COPY deploy.sh.rsd $W_DIR/deploy.sh
+COPY deploy.sh $W_DIR/deploy.sh
 
 # Install OpenJDK 8, Maven, SBT, NodeJS and other software
 RUN \
