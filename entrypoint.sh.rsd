@@ -1,7 +1,6 @@
 #!/bin/sh
 
 EVAL_FILE=$W_DIR/splicious/config/eval.conf
-UIAPP_FILE=$W_DIR/frontui/conf/application.conf
 
 #ENV NODEADMINEMAIL admin@localhost
 #ENV NODEADMINPASS a
@@ -10,11 +9,6 @@ UIAPP_FILE=$W_DIR/frontui/conf/application.conf
 #ENV API_HOST "127.0.0.1"
 #ENV API_PORT "9876"
 
-## UI
-#update backend server 
-if [ -f $UIAPP_FILE ] ; then 
-  sed -i 's/baseURL: \"http:\/\/localhost:9876\/api\"/baseURL: \"http:\/\/'$API_HOST':'$API_PORT'\/api\"/' $UIAPP_FILE
-fi 
 ## Backend
 #Node Admin
 if [ -f $EVAL_FILE ] ; then 
