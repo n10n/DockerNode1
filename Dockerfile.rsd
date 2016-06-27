@@ -1,5 +1,6 @@
 # Set the base image
-FROM alpine:3.4
+FROM alpine:3.3
+# 3.4 don't work properly with wget on https
 
 LABEL description="Required Software Distribution" version="rsd1.1"
 MAINTAINER N<ns68751+n10n@gmail.com>
