@@ -1,33 +1,13 @@
 #!/bin/sh
 
 EVAL_FILE=$W_DIR/splicious/config/eval.conf
-UISH_FILE=$W_DIR/frontui/frontui.sh
-UIAPP_FILE=$W_DIR/frontui/conf/application.conf
+LIB_DIR=$W_DIR/splicious/lib
+LIBUI_DIR=$W_DIR/splicious/libui
 
 #ENV NODEADMINEMAIL admin@localhost
 #ENV NODEADMINPASS a
-
-#ENV API_HOST "127.0.0.1"
-#ENV API_PORT "9876"
-#ENV RUNB_PORT 9876
-#ENV RUNF_PORT 9000
-
-#DEPLOYMENT_MODE=colocated
 #DB_HOST=127.0.0.1
 #DB_PORT=27017
-#DSLSERVER=127.0.0.1
-#DSLPORT=5672
-#BFCLSERVER=127.0.0.1
-#BFCLPORT=5672
-#DSLEPSSERVER=127.0.0.1
-#DSLEPSPORT=5672
-
-## UI
-#update backend server 
-sed -i 's/baseURL: \"http:\/\/localhost:9876\/api\"/baseURL: \"http:\/\/'$API_HOST':'$API_PORT'\/api\"/' $UIAPP_FILE
-
-#update running port
-sed -i 's/http.port=9000/http.port='$RUNF_PORT'/' $UISH_FILE
 
 ## Backend
 #Node Admin
@@ -38,18 +18,27 @@ sed -i 's/nodeAdminPass = \"a\"/nodeAdminPass = \"'$NODEADMINPASS'\"/' $EVAL_FIL
 sed -i 's/dbHost = \"127.0.0.1\"/dbHost = \"'$DB_HOST'\"/' $EVAL_FILE
 sed -i 's/dbPort = \"27017\"/dbPort = \"'$DB_PORT'\"/' $EVAL_FILE
 
-#DeploymentMode
-sed -i 's/deploymentMode = \"colocated\"/deploymentMode = \"'$DEPLOYMENT_MODE'\"/' $EVAL_FILE
-#DSLCommLinkServer
-sed -i 's/DSLCommLinkServerHost = \"127.0.0.1\"/DSLCommLinkServerHost = \"'$DSLSERVER'\"/' $EVAL_FILE
-#sed -i 's/DSLCommLinkServerPort = \"5672\"/DSLCommLinkServerPort = \"'$DSLPORT'\"/' $EVAL_FILE
-sed -i 's/DSLCommLinkServerPort = 5672/DSLCommLinkServerPort = \"'$DSLPORT'\"/' $EVAL_FILE
-#BFactoryCommLinkServer
-sed -i 's/BFactoryCommLinkServerHost = \"127.0.0.1\"/BFactoryCommLinkServerHost = \"'$BFCLSERVER'\"/' $EVAL_FILE
-#sed -i 's/BFactoryCommLinkServerPort = \"5672\"/BFactoryCommLinkServerPort = \"'$BFCLPORT'\"/' $EVAL_FILE
-sed -i 's/BFactoryCommLinkServerPort = 5672/BFactoryCommLinkServerPort = \"'$BFCLPORT'\"/' $EVAL_FILE
-#DSLEvaluatorPreferredSupplier
-sed -i 's/DSLEvaluatorPreferredSupplierHost = \"127.0.0.1\"/DSLEvaluatorPreferredSupplierHost = \"'$DSLEPSSERVER'\"/' $EVAL_FILE
-#sed -i 's/DSLEvaluatorPreferredSupplierPort = \"5672\"/DSLEvaluatorPreferredSupplierPort = \"'$DSLEPSPORT'\"/' $EVAL_FILE
-sed -i 's/DSLEvaluatorPreferredSupplierPort = 5672/DSLEvaluatorPreferredSupplierPort = \"'$DSLEPSPORT'\"/' $EVAL_FILE
+#Pull update
+if [ "$UBIN" == "1" ]; then
+  cd $W_DIR/splicious ; git checkout -f; git pull 
+fi
+#UBIN = //Update binaries set 1 for update and 0 if not
+#AJAR= agentservices-store-ia-1.9.5.jar//Agent store jar
+#GJAR= gloseval-0.1.jar //Gloseval jar
+#SJAR= specialK-1.1.8.5.jar //SpecialK jar
+if [ "$UBKBIN" == "1" ]; then
+  wget https://github.com/synereo/compilednode/raw/master/lib/$AJAR -O $LIB_DIR/$AJAR
+  wget https://github.com/synereo/compilednode/raw/master/lib/$GJAR -O $LIB_DIR/$GJAR
+  wget https://github.com/synereo/compilednode/raw/master/lib/$SJAR -O $LIB_DIR/$SJAR
+fi
+#UUIBIN= //Update binaries set 1 for update and 0 if not
+#UIAJAR=server.server-1.0.1-assets.jar
+#UIEJAR=server.server-1.0.1-sans-externalized.jar
+#UISJAR=sharedjvm.sharedjvm-0.1-SNAPSHOT.jar
+if [ "$UUIBIN" == "1" ]; then
+  wget https://github.com/synereo/compilednode/raw/master/libui/$UIAJAR -O $LIBUI_DIR/$UIAJAR
+  wget https://github.com/synereo/compilednode/raw/master/libui/$UIEJAR -O $LIBUI_DIR/$UIEJAR
+  wget https://github.com/synereo/compilednode/raw/master/libui/$UISJAR -O $LIBUI_DIR/$UISJAR
+fi
+
 exec "$@"
