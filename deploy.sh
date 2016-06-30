@@ -87,10 +87,10 @@ fi
       cd $S_DIR ; tar -xzvf scalabin.tar.gz ; rm -f scalabin.tar.gz
     fi 
     if [ ! -f "$S_DIR/splicious.sh" ]; then
-      wget https://github.com/n10n/DockerNode/raw/master/splicious.sh -O $S_DIR/splicious.sh
+      wget https://github.com/n10n/DockerNode/raw/master/splicious.sh -O $S_DIR/bin/splicious
     fi 
     if [ ! -f "$W_DIR/frontui/frontui.sh" ]; then
-      wget https://github.com/n10n/DockerNode/raw/master/frontui.sh -O $W_DIR/frontui/frontui.sh
+      wget https://github.com/n10n/DockerNode/raw/master/frontui.sh -O $S_DIR/bin/frontui
     fi 
   fi
   cd $W_DIR/ && \
