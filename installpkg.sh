@@ -3,7 +3,7 @@ if command -v mvn 2 > /dev/null; then
 else 
   wget http://apache.claz.org/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz -O \
          /usr/lib/apache-maven-3.3.9-bin.tar.gz
-  tar -xzvf apache-maven-3.3.9-bin.tar.gz -C /usr/lib/
+  tar -xzvf /usr/lib/apache-maven-3.3.9-bin.tar.gz -C /usr/lib/
   cd /usr/bin; ln -s ../lib/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
 fi
 if command -v sbt 2 > /dev/null; then
@@ -11,6 +11,6 @@ if command -v sbt 2 > /dev/null; then
 else
   wget https://dl.bintray.com/sbt/native-packages/sbt/0.13.11/sbt-0.13.11.tgz -O \
          /usr/lib/sbt-0.13.11.tgz
-  tar -xzvf sbt-0.13.11.tgz -C /usr/lib/ 
+  tar -xzvf /usr/lib/sbt-0.13.11.tgz -C /usr/lib/ 
   cd /usr/bin; ln -s ../lib/sbt/bin/sbt /usr/bin/sbt
 fi 
