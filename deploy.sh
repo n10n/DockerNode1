@@ -15,7 +15,7 @@ if [ 0 -eq $DOC ]; then
   fi 
 fi
   \
-  mkdir -p $W_DIR/frontui $S_DIR/lib $S_DIR/logs $S_DIR/config && \
+  mkdir -p $W_DIR/frontui $S_DIR/lib $S_DIR/libui $S_DIR/logs $S_DIR/config && \
   \
 ## engine    
   cd $W_DIR && \
@@ -71,10 +71,10 @@ fi
   cd $W_DIR/frontuic && \
 #  sbt -java-home /usr/local/jdk1.8.0_77 -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
   sbt -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
-  rm -rf $W_DIR/frontui/bin $W_DIR/frontui/conf $W_DIR/frontui/lib && \
-  cp -rfp $W_DIR/frontuic/server/target/universal/stage/bin $W_DIR/frontui/ && \
-  cp -rfp $W_DIR/frontuic/server/target/universal/stage/conf $W_DIR/frontui/ && \
-  cp -rfp $W_DIR/frontuic/server/target/universal/stage/lib $W_DIR/frontui/ && \
+  rm -rf $S_DIR/libui && \
+  cp -fp $W_DIR/frontuic/server/target/universal/stage/conf/application.conf $S_DIR/config/ui.conf && \
+  ln -fs config/ui.conf ui.conf && \
+  cp -rfp $W_DIR/frontuic/server/target/universal/stage/lib/* $W_DIR/frontui/libui/ && \
   cd $W_DIR/ && \
   \
   if [ 0 -eq $DOC ]; then
@@ -93,8 +93,18 @@ fi
       wget https://github.com/n10n/DockerNode/raw/master/frontui.sh -O $S_DIR/bin/frontui
     fi 
   fi
+  
+if [ ! -d $S_DIR/scripts ]; then
+  svn checkout --force https://github.com/synereo/gloseval/branches/1.0/scripts 
+  rm -rf $S_DIR/scripts/.svn 
+  svn checkout --force https://github.com/synereo/agent-service-ati-ia/branches/1.0/AgentServices-Store/scripts 
+  rm -rf $S_DIR/scripts/.svn 
+  svn checkout --force https://github.com/synereo/specialk/trunk/scripts 
+  rm -rf $S_DIR/scripts/.svn
+fi   
+
   cd $W_DIR/ && \
-  chmod 755 $S_DIR/splicious.sh $S_DIR/bin/* $W_DIR/frontui/frontui.sh
+  chmod 755 $S_DIR/bin/* $S_DIR/bin/* 
 
 ## reduce size
 #  rm -rf $W_DIR/GLoSEval/target && \
