@@ -15,7 +15,7 @@ if [ 0 -eq $DOC ]; then
   fi 
 fi
   \
-  mkdir -p $W_DIR/frontui $S_DIR/lib $S_DIR/libui $S_DIR/logs $S_DIR/config && \
+  mkdir -p $S_DIR/lib $S_DIR/libui $S_DIR/logs $S_DIR/config && \
   \
 ## engine    
   cd $W_DIR && \
@@ -71,25 +71,24 @@ fi
   cd $W_DIR/frontuic && \
 #  sbt -java-home /usr/local/jdk1.8.0_77 -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
   sbt -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
-  rm -rf $S_DIR/libui && \
   cp -fp $W_DIR/frontuic/server/target/universal/stage/conf/application.conf $S_DIR/config/ui.conf && \
-  ln -fs config/ui.conf ui.conf && \
-  cp -rfp $W_DIR/frontuic/server/target/universal/stage/lib/* $W_DIR/frontui/libui/ && \
+  cd $S_DIR; ln -fs config/ui.conf ui.conf && \
+  cp -rfp $W_DIR/frontuic/server/target/universal/stage/lib/* $S_DIR/libui/ && \
   cd $W_DIR/ && \
   \
   if [ 0 -eq $DOC ]; then
     if [ ! -d "$S_DIR/agentui" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/agentui.tar.gz -O $S_DIR/agentui.tar.gz
-      cd $S_DIR ; tar -xzvf agentui.tar.gz ; rm -f agentui.tar.gz
+      tar -xzvf $S_DIR/agentui.tar.gz -C $S_DIR; rm -f agentui.tar.gz
     fi 
     if [ ! -f "$S_DIR/bin/scala" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/scalabin.tar.gz -O $S_DIR/scalabin.tar.gz
-      cd $S_DIR ; tar -xzvf scalabin.tar.gz ; rm -f scalabin.tar.gz
+      tar -xzvf $S_DIR/scalabin.tar.gz -C $S_DIR; rm -f scalabin.tar.gz
     fi 
-    if [ ! -f "$S_DIR/splicious.sh" ]; then
+    if [ ! -f "$S_DIR/bin/splicious" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/splicious.sh -O $S_DIR/bin/splicious
     fi 
-    if [ ! -f "$W_DIR/frontui/frontui.sh" ]; then
+    if [ ! -f "$W_DIR/bin/frontui" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/frontui.sh -O $S_DIR/bin/frontui
     fi 
   fi
