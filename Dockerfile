@@ -19,8 +19,6 @@ RUN \
     apt-get update \
     && apt-get -y install git nodejs openjdk-8-jdk subversion wget \
     && cd $W_DIR \
-    && wget https://bintray.com/artifact/download/omni/OmniBinaries/omnicore-0.0.10.0-rel-linux64.tar.gz -O $W_DIR/omnicore-0.0.10.0-rel-linux64.tar.gz \
-    && wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz -O $W_DIR/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz \
     && wget https://github.com/n10n/DockerNode/raw/master/entrypoint.sh -O $W_DIR/entrypoint.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/installpkg.sh -O $W_DIR/installpkg.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/installtools.sh -O $W_DIR/installtools.sh \
