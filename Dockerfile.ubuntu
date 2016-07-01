@@ -11,13 +11,13 @@ ENV DB_PORT 27017
 
 ENV W_DIR /usr/local
 
-ADD ivy2.tar.gz /root/
-ADD m2.tar.gz /root/
-ADD sbt.tar.gz /root/
+#ADD ivy2.tar.gz /root/
+#ADD m2.tar.gz /root/
+#ADD sbt.tar.gz /root/
 
 RUN \
     apt-get update \
-    && apt-get install git openjdk-8-jdk subversion wget \
+    && apt-get -y install git openjdk-8-jdk subversion wget \
     && cd $W_DIR \
     && wget https://bintray.com/artifact/download/omni/OmniBinaries/omnicore-0.0.10.0-rel-linux64.tar.gz -O $W_DIR/omnicore-0.0.10.0-rel-linux64.tar.gz \
     && wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz -O $W_DIR/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz \
