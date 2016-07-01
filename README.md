@@ -31,17 +31,13 @@ Run the following commands
   Use "synereonode" as image name in subsequent steps where image id is required. You can use image name of your choice but it must be all lowercase. 
  
 ## Running standalone node:
-Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac) appropriately below. If you are using pre-built image from Docker Hub i.e. livelygig/backend then replace the following field in docker run command below:
-    `replace IP_ADDRESS with: 192.168.99.100` and `replace spliciousbkendimage with: livelygig/backend` 
+Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by Docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac) appropriately below. If you are using pre-built image from Docker Hub i.e. livelygig/backend then replace the following field in docker run command below:
+    `replace IP_ADDRESS with: 192.168.99.100 for Windows and Mac or 172.17.0.1 for Linux` and `replace spliciousbkendimage with: livelygig/backend` 
 
-For example, the command on step 3a for automated process becomes: 
-    
-    docker run -it -e MONGODB_HOST=192.168.99.100 -e MONGODB_PORT=27017 --name backendNode -p 8888:9876 -d livelygig/backend /usr/local/splicious/run.sh
+#### Running docker image - manual process (UBIN option will enable automatic download of the latest precompiled backend and frontend jar files): 
 
-#### Running docker image - manual process: 
-
-    3a. docker run -it -e DB_HOST=<IP_ADDRESS> -e \
-                   --name sn1 -p 8080:9000 -p 8888:9876 snode /bin/bash
+    3a. docker run -it --link mdb1:mongo -e UBIN=1 -e DB_HOST=<IP_ADDRESS> -e \
+                   --name sn1 -p 80:9000 -p 8080:9876 precompilednode /bin/bash
   
 At the # prompt, run the commands below
     
@@ -52,17 +48,22 @@ At the # prompt, run the commands below
 
 ## Accessing container:
 
-Visit the webpage `http://<docker_IP>:8888/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8888 then access the backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false URL
+Visit the webpage `http://<docker_IP>:8080/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8080 for Mac and Windows users and 172.17.0.1 for Linux users, then access the backend using http://192.168.99.100:8080/agentui/agentui.html?demo=false URL or http://172.17.0.0:8080/agentui/agentui.html?demo=false
 
+Visit http://<docker_IP>:80/ to access new UI. When prompted for API detail enter the following detail:
+```
+Host: <docker_IP>
+Port: 8080 (this is the port mapped out of for the backend)
+```
 The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass` or add NODEADMINEMAIL and NODEADMINPASS to docker run command. For example:
   ```
-  docker run -it --link mdb1:mongo \
+  docker run -it --link mdb1:mongo -e UBIN=1 \
                  -e NODEADMINEMAIL=runforfun@localhost \
                  -e NODEADMINPASS=FunNeverEnds2016 \
                  -e DB_HOST=192.168.99.100 \
-                 -p 8080:9000 \
-                 -p 8888:9876 --name backendNode \
-                 -d snode /usr/local/splicious/bin/splicious
+                 -p 80:9000 \
+                 -p 8080:9876 --name precompilednode \
+                 snode /bin/bash
   ```
 See screenshot 
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk. To see log files, go to /usr/local/splicious/logs folder after login into the container.
