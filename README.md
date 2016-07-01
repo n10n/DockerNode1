@@ -12,7 +12,7 @@ Dockerfile for easily setting up a node and instructions are for building backen
   MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node. 
   
  * git client installed and git command in path if want to build the node from scratch otherwise use Docker image (preferred method)
- * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. MongoDB is installaed as part of installation steps. Importing old MongoDB database dump from different node is not advisable.
+ * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. MongoDB is installed as part of installation steps. Importing old MongoDB database dump from different node is not advisable.
 
 ## Source files
 Download files in a directory of your choice or use command as below to build Docker image (make sure docker is running and available). Windows users, run "git config --global core.autocrlf false" command before running the git clone command otherwise container may fail to execute properly.
