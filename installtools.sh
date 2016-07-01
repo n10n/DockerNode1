@@ -1,4 +1,4 @@
-W_DIR=/usr/local
+#W_DIR=/usr/local
 OCORE=omnicore-0.0.10.0-rel-linux64.tar.gz
   wget https://bintray.com/artifact/download/omni/OmniBinaries/$OCORE -O $W_DIR/$OCORE
   mkdir -p $W_DIR/omnicore; tar -xzvf $W_DIR/$OCORE -C $W_DIR/omnicore  --strip-components 1 
