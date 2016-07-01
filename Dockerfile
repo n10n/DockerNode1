@@ -1,39 +1,39 @@
 # Set the base image
-FROM livelygig/rsd
+FROM ubuntu
 
-LABEL description="Node - compiled version" version="0.2.0"
+LABEL description="Node based on Ubuntu" version="0.1.0"
 MAINTAINER N<ns68751+n10n@gmail.com>
 
 ENV NODEADMINEMAIL admin@localhost
 ENV NODEADMINPASS a
 ENV DB_HOST 127.0.0.1
 ENV DB_PORT 27017
+
 ENV W_DIR /usr/local
 
-ENV UBIN 0
-
-ENV UBKBIN 0
-ENV AJAR agentservices-store-ia-1.9.5.jar
-ENV GJAR gloseval-0.1.jar
-ENV SJAR specialK-1.1.8.5.jar
-
-ENV UUIBIN 0
-ENV UIAJAR server.server-1.0.1-assets.jar
-ENV UIEJAR server.server-1.0.1-sans-externalized.jar
-ENV UISJAR sharedjvm.sharedjvm-0.1-SNAPSHOT.jar
-
-COPY precompiled.sh $W_DIR/
-COPY entrypoint.sh $W_DIR/
+#ADD ivy2.tar.gz /root/
+#ADD m2.tar.gz /root/
+#ADD sbt.tar.gz /root/
 
 RUN \
-    cd $W_DIR \
-    && chmod 755 $W_DIR/entrypoint.sh \
-    && chmod 755 $W_DIR/precompiled.sh \
-    && ./precompiled.sh \
+    apt-get update \
+    && apt-get -y install git openjdk-8-jdk subversion wget \
+    && cd $W_DIR \
+    && wget https://bintray.com/artifact/download/omni/OmniBinaries/omnicore-0.0.10.0-rel-linux64.tar.gz -O $W_DIR/omnicore-0.0.10.0-rel-linux64.tar.gz \
+    && wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz -O $W_DIR/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz \
+    && wget https://github.com/n10n/DockerNode/raw/master/entrypoint.sh -O $W_DIR/entrypoint.sh \
+    && wget https://github.com/n10n/DockerNode/raw/master/installpkg.sh -O $W_DIR/installpkg.sh \
+    && wget https://github.com/n10n/DockerNode/raw/master/installtools.sh -O $W_DIR/installtools.sh \
+    && wget https://github.com/n10n/DockerNode/raw/master/deploy.sh -O $W_DIR/deploy.sh \
+    && wget https://github.com/n10n/DockerNode/raw/master/reducesize.sh -O $W_DIR/reducesize.sh \
+    && chmod 755 $W_DIR/entrypoint.sh $W_DIR/installpkg.sh $W_DIR/installtools.sh $W_DIR/deploy.sh $W_DIR/reducesize.sh\
+    && ./installpkg.sh \
+    && ./installtools.sh \
+    && ./deploy.sh \
 #    && ./reducesize.sh
-    
+
 WORKDIR $W_DIR
-EXPOSE 9876 9000
+EXPOSE 80 8080 9876 9000
 ENTRYPOINT ["/usr/local/entrypoint.sh"]
 CMD [ "/usr/local/splicious/bin/splicious" ]
-CMD [ "/usr/local/frontui/bin/frontui" ]
+CMD [ "/usr/local/splicious/bin/frontui" ]
