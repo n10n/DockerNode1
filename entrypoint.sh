@@ -1,8 +1,8 @@
 #!/bin/sh
 
 EVAL_FILE=$W_DIR/splicious/config/eval.conf
-UISH_FILE=$W_DIR/frontui/frontui.sh
-UIAPP_FILE=$W_DIR/frontui/conf/application.conf
+UISH_FILE=$W_DIR/splicious/bin/frontui
+UIAPP_FILE=$W_DIR/splicious/config/ui.conf
 
 #ENV NODEADMINEMAIL admin@localhost
 #ENV NODEADMINPASS a
