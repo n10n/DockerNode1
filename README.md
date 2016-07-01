@@ -28,8 +28,8 @@ Run the following commands
   Use "scoremongonode" as image name in subsequent steps where image id is required. You can use image name of your choice but it must be all lowercase. 
  
 ## Running standalone node:
-Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac) appropriately below. If you are using pre-built image from Docker Hub i.e. livelygig/backend then replace the following field in docker run command below:
-    `replace IP_ADDRESS with: 192.168.99.100` and `replace spliciousbkendimage with: livelygig/backend` 
+Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac and 172.17.0.1 in Linux baseds systems) appropriately below. If you are using pre-built image from Docker Hub i.e. livelygig/backend then replace the following field in docker run command below:
+    `replace IP_ADDRESS with: 192.168.99.100 (for Mac and Windows) or 172.17.0.1 (for Linux)` and `replace spliciousbkendimage with: livelygig/backend` 
 
 #### Running docker image - manual process: 
 
@@ -44,20 +44,22 @@ At the # prompt, run the commands below and these will start OmniCored, MongoDB 
     3e. ./ostart.sh
     3f. cd /usr/local/splicious
     3g. bin/splicious start
+    
+If want to run the latest UI then run the commands below:
+
+    3h. cd /usr/local/splicious
+    3i. bin/frontui start
 
 ## Accessing container:
 
-Visit the webpage `http://<docker_IP>:8080/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8888 then access the backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false URL
+Visit the webpage `http://<docker_IP>:8080/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8080 then access the backend using http://192.168.99.100:8080/agentui/agentui.html?demo=false URL and for Linux based systems, URL may look like http://172.17.0.1:8080/agentui/agentui.html?demo=false
 
-The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass` or add NODEADMINEMAIL and NODEADMINPASS to docker run command. For example:
+The default user name is admin@localhost and password is "a" without quotes. This can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass` or add NODEADMINEMAIL and NODEADMINPASS to docker run command. For example:
   ```
-  docker run -it --link mdb1:mongo \
-                 -e NODEADMINEMAIL=runforfun@localhost \
+  docker run -it -e NODEADMINEMAIL=runforfun@localhost \
                  -e NODEADMINPASS=FunNeverEnds2016 \
                  -e DB_HOST=127.0.0.1 \
-                 -p 80:9000 \
-                 -p 8080:9876 --name backendNode \
-                 scoremongonode /bin/bash
+                 --name scmn1 -p 80:9000 -p 8080:9876 scoremongonode /bin/bash
   ```
 See screenshot 
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk. To see log files, go to /usr/local/splicious/logs folder after login into the container.
