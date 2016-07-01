@@ -23,9 +23,10 @@ RUN \
     && wget http://downloads.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz -O $W_DIR/mongodb-linux-x86_64-ubuntu1604-v3.2-latest.tgz \
     && wget https://github.com/n10n/DockerNode/raw/master/entrypoint.sh -O $W_DIR/entrypoint.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/installpkg.sh -O $W_DIR/installpkg.sh \
+    && wget https://github.com/n10n/DockerNode/raw/master/installtools.sh -O $W_DIR/installtools.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/deploy.sh -O $W_DIR/deploy.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/reducesize.sh -O $W_DIR/reducesize.sh \
-    && chmod 755 $W_DIR/entrypoint.sh $W_DIR/installpkg.sh $W_DIR/deploy.sh $W_DIR/reducesize.sh\
+    && chmod 755 $W_DIR/entrypoint.sh $W_DIR/installpkg.sh $W_DIR/installtools.sh $W_DIR/deploy.sh $W_DIR/reducesize.sh\
     && ./installpkg.sh \
     && ./installtools.sh \
     && ./deploy.sh \
