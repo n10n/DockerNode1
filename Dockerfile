@@ -24,7 +24,7 @@ ENV UISJAR sharedjvm.sharedjvm-0.1-SNAPSHOT.jar
 
 RUN \
     cd $W_DIR \
-    && wget https://github.com/n10n/DockerNode/raw/precompiled/entrypoint.sh -O $W_DIR/entrypoint.sh \
+    && wget https://github.com/n10n/DockerNode/raw/master/entrypoint.sh.precompiled -O $W_DIR/entrypoint.sh \
     && wget https://github.com/n10n/DockerNode/raw/precompiled/precompiled.sh -O $W_DIR/precompiled.sh \
     && chmod 755 $W_DIR/entrypoint.sh $W_DIR/precompiled.sh \
     && ./precompiled.sh \
