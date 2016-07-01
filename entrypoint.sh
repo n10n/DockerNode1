@@ -24,10 +24,10 @@ UIAPP_FILE=$W_DIR/splicious/config/ui.conf
 
 ## UI
 #update backend server 
-sed -i 's/baseURL: \"http:\/\/localhost:9876\/api\"/baseURL: \"http:\/\/'$API_HOST':'$API_PORT'\/api\"/' $UIAPP_FILE
+#sed -i 's/baseURL: \"http:\/\/localhost:9876\/api\"/baseURL: \"http:\/\/'$API_HOST':'$API_PORT'\/api\"/' $UIAPP_FILE
 
 #update running port
-sed -i 's/http.port=9000/http.port='$RUNF_PORT'/' $UISH_FILE
+#sed -i 's/http.port=9000/http.port='$RUNF_PORT'/' $UISH_FILE
 
 ## Backend
 #Node Admin
