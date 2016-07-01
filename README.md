@@ -17,15 +17,15 @@ Dockerfile for easily setting up a node and instructions are for building backen
 ## Source files
 Download files in a directory of your choice or use command as below to build Docker image (make sure docker is running and available). Windows users, run "git config --global core.autocrlf false" command before running the git clone command otherwise container may fail to execute properly.
 
-    1. git clone -b ubuntu https://github.com/synereo/dockernode.git SNode
+    1. git clone -b ubuntu https://github.com/n10n/DockerNode.git SNode
 
 ## Build docker image using: 
 Run the following commands
 
     2a. cd SNode
-    2b. docker build -t snode . 
+    2b. docker build -t scoremongonode . 
 
-  Use "synereonode" as image name in subsequent steps where image id is required. You can use image name of your choice but it must be all lowercase. 
+  Use "scoremongonode" as image name in subsequent steps where image id is required. You can use image name of your choice but it must be all lowercase. 
  
 ## Running standalone node:
 Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac) appropriately below. If you are using pre-built image from Docker Hub i.e. livelygig/backend then replace the following field in docker run command below:
@@ -33,33 +33,35 @@ Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this
 
 For example, the command on step 3a for automated process becomes: 
     
-    docker run -it -e MONGODB_HOST=192.168.99.100 -e MONGODB_PORT=27017 --name backendNode -p 8888:9876 -d livelygig/backend /usr/local/splicious/run.sh
+    docker run -it -e DB_HOST=127.0.0.1 -e DB_PORT=27017 --name backendNode -p 80:9000 -p 8080:9876 -d livelygig/backend /usr/local/splicious/run.sh
 
 #### Running docker image - manual process: 
 
-    3a. docker run -it -e DB_HOST=<IP_ADDRESS> -e \
-                   --name sn1 -p 8080:9000 -p 8888:9876 snode /bin/bash
+    3a. docker run -it -e DB_HOST=127.0.0.1 -e \
+                   --name scmn1 -p 80:9000 -p 8080:9876 scoremongonode /bin/bash
   
 At the # prompt, run the commands below
     
-    3b. cd /usr/local/splicious
-    3c. bin/splicious start
-    3d. bin/frontui start
-  
+    3b. cd /usr/local/mongodb
+    3c. ./mstart.sh
+    3d. cd /usr/local/omnicore
+    3e. ./ostart.sh
+    3f. cd /usr/local/splicious
+    3g. bin/splicious start
 
 ## Accessing container:
 
-Visit the webpage `http://<docker_IP>:8888/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8888 then access the backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false URL
+Visit the webpage `http://<docker_IP>:8080/agentui/agentui.html?demo=false` and if this doesn't work then find the mapping URL (ipaddress:port from Kitematic screen - select your container there i.e. backendNode). For example, you may see the access URL like 192.168.99.100:8888 then access the backend using http://192.168.99.100:8888/agentui/agentui.html?demo=false URL
 
 The default user name/password is admin@localhost/a and can be changed in /usr/local/splicious/eval.conf file by editing `nodeAdminEmail` and `nodeAdminPass` or add NODEADMINEMAIL and NODEADMINPASS to docker run command. For example:
   ```
   docker run -it --link mdb1:mongo \
                  -e NODEADMINEMAIL=runforfun@localhost \
                  -e NODEADMINPASS=FunNeverEnds2016 \
-                 -e DB_HOST=192.168.99.100 \
-                 -p 8080:9000 \
-                 -p 8888:9876 --name backendNode \
-                 -d snode /usr/local/splicious/bin/splicious
+                 -e DB_HOST=127.0.0.1 \
+                 -p 80:9000 \
+                 -p 8080:9876 --name backendNode \
+                 scoremongonode /bin/bash
   ```
 See screenshot 
 https://drive.google.com/open?id=0B1NrzDY6kx1JTzdPNVFlU19xekk. To see log files, go to /usr/local/splicious/logs folder after login into the container.
