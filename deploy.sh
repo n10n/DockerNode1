@@ -88,7 +88,7 @@ fi
     if [ ! -f "$S_DIR/bin/splicious" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/splicious.sh -O $S_DIR/bin/splicious
     fi 
-    if [ ! -f "$S_DIR/bin/splicious" ]; then
+    if [ ! -f "$S_DIR/bin/frontui" ]; then
       wget https://github.com/n10n/DockerNode/raw/master/frontui.sh -O $S_DIR/bin/frontui
     fi 
   fi
