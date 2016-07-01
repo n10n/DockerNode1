@@ -33,7 +33,7 @@ Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this
 
 #### Running docker image - manual process: 
 
-    3a. docker run -it -e DB_HOST=127.0.0.1 -e \
+    3a. docker run -it -e DB_HOST=127.0.0.1 \
                    --name scmn1 -p 80:9000 -p 8080:9876 scoremongonode /bin/bash
   
 At the # prompt, run the commands below and these will start OmniCored, MongoDB and Splciious
