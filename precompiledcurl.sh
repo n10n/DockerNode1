@@ -21,9 +21,9 @@ if [ ! -d $S_DIR/scripts ]; then
   rm -rf $S_DIR/scripts/.svn
 fi 
 \
-curl -L https://github.com/synereo/gloseval/raw/1.0/eval.conf -o $S_DIR/config/eval.conf && \
-curl -L https://github.com/synereo/gloseval/raw/1.0/log.properties -o $S_DIR/log.properties && \
-curl -L https://github.com/LivelyGig/ProductWebUI/raw/master/server/src/main/resources/application.conf -o $S_DIR/config/ui.conf && \
+curl -L https://raw.githubusercontent.com/synereo/gloseval/1.0/eval.conf -o $S_DIR/config/eval.conf && \
+curl -L https://raw.githubusercontent.com/synereo/gloseval/1.0/log.properties -o $S_DIR/log.properties && \
+curl -L https://raw.githubusercontent.com/LivelyGig/ProductWebUI/master/server/src/main/resources/application.conf -o $S_DIR/config/ui.conf && \
 \
 cd $S_DIR && \
 ln -fs config/eval.conf eval.conf && \
