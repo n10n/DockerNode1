@@ -1,3 +1,4 @@
+#! /bin/bash
 findAppHome () {
   local source="${BASH_SOURCE[0]}"
   while [ -h "$source" ] ; do
