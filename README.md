@@ -31,16 +31,12 @@ Run the following commands
 Standalone mode requires running MongoDB and please replace the IP_ADDRESS (this address is accquired by docker and displays at starting of it i.e. 192.168.99.100 in Windows and Mac) appropriately below. If you are using pre-built image from Docker Hub i.e. livelygig/backend then replace the following field in docker run command below:
     `replace IP_ADDRESS with: 192.168.99.100` and `replace spliciousbkendimage with: livelygig/backend` 
 
-For example, the command on step 3a for automated process becomes: 
-    
-    docker run -it -e DB_HOST=127.0.0.1 -e DB_PORT=27017 --name backendNode -p 80:9000 -p 8080:9876 -d livelygig/backend /usr/local/splicious/run.sh
-
 #### Running docker image - manual process: 
 
     3a. docker run -it -e DB_HOST=127.0.0.1 -e \
                    --name scmn1 -p 80:9000 -p 8080:9876 scoremongonode /bin/bash
   
-At the # prompt, run the commands below
+At the # prompt, run the commands below and these will start OmniCored, MongoDB and Splciious
     
     3b. cd /usr/local/mongodb
     3c. ./mstart.sh
