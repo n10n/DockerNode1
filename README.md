@@ -1,7 +1,7 @@
 
 ## Synereo Node Dockerfile
 
-Dockerfile for easily setting up a node and instructions are for building backend from pre-compipled source code. This process will take around 5-10 minutes to download around 300 MB of data. These instructions are valid for first time use and once docker images are created and working then use `docker start ...` command. This build image contains older version of UI (i.e. Splicious UI) and newer version of Synereo UI.
+Dockerfile for easily setting up a node and instructions are for building backend from pre-compipled source code. This process will take around 25-40 minutes to download around 600 MB of data. These instructions are valid for first time use and once docker images are created and working then use `docker start ...` command. This build image contains older version of UI (i.e. Splicious UI) and newer version of Synereo UI.
 
 ## Prerequisites
  * Minimum 2GB RAM but 4 GB RAM is recommended for compling the source code.
@@ -12,15 +12,12 @@ Dockerfile for easily setting up a node and instructions are for building backen
   MongoDB is required to run a standalone node. MongoDB and RabbitMQ are required to run a full node. 
   
  * git client installed and git command in path if want to build the node from scratch otherwise use Docker image (preferred method)
- * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. Follow the instruction below if want to use Docker image. Importing old MongoDB database dump from different node is not advisable.
-
-    `docker pull mongo` then 
-    `docker run --name mdb1 -p 27017:27017 -d mongo`
+ * mongodb running version: 2.6.4 (https://www.mongodb.com/) but it worked with the latest version. MongoDB is installaed as part of installation steps. Importing old MongoDB database dump from different node is not advisable.
 
 ## Source files
 Download files in a directory of your choice or use command as below to build Docker image (make sure docker is running and available). Windows users, run "git config --global core.autocrlf false" command before running the git clone command otherwise container may fail to execute properly.
 
-    1. git clone https://github.com/synereo/dockernode.git SNode
+    1. git clone -b ubuntu https://github.com/synereo/dockernode.git SNode
 
 ## Build docker image using: 
 Run the following commands
