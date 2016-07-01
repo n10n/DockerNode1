@@ -27,8 +27,7 @@ COPY entrypoint.sh $W_DIR/
 
 RUN \
     cd $W_DIR \
-    && chmod 755 $W_DIR/entrypoint.sh \
-    && chmod 755 $W_DIR/precompiled.sh \
+    && chmod 755 $W_DIR/entrypoint.sh $W_DIR/precompiled.sh \
     && ./precompiled.sh \
 #    && ./reducesize.sh
     
