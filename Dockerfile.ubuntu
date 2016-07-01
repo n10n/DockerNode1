@@ -25,10 +25,10 @@ RUN \
     && wget https://github.com/n10n/DockerNode/raw/master/installpkg.sh -O $W_DIR/installpkg.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/deploy.sh -O $W_DIR/deploy.sh \
     && wget https://github.com/n10n/DockerNode/raw/master/reducesize.sh -O $W_DIR/reducesize.sh \
+    && chmod 755 $W_DIR/entrypoint.sh $W_DIR/installpkg.sh $W_DIR/deploy.sh $W_DIR/reducesize.sh\
     && ./installpkg.sh \
     && ./installtools.sh \
     && ./deploy.sh \
-    && chmod 755 $W_DIR/entrypoint.sh $W_DIR/installpkg.sh $W_DIR/deploy.sh $W_DIR/reducesize.sh\
 #    && ./reducesize.sh
 
 WORKDIR $W_DIR
