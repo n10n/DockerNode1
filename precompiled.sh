@@ -1,13 +1,13 @@
 #! /bin/bash
-findAppHome () {
-  local source="${BASH_SOURCE[0]}"
-  while [ -h "$source" ] ; do
-    local linked="$(readlink "$source")"
-    local dir="$( cd -P $(dirname "$source") && cd -P $(dirname "$linked") && pwd )"
-    source="$dir/$(basename "$linked")"
-  done
-  ( cd -P "$(dirname "$source")/" && pwd )
-}
+# findAppHome () {
+#  local source="${BASH_SOURCE[0]}"
+#  while [ -h "$source" ] ; do
+#    local linked="$(readlink "$source")"
+#    local dir="$( cd -P $(dirname "$source") && cd -P $(dirname "$linked") && pwd )"
+#    source="$dir/$(basename "$linked")"
+#  done
+#  ( cd -P "$(dirname "$source")/" && pwd )
+#}
 #W_DIR="$(findAppHome)"
 S_DIR=$W_DIR/splicious
 DOC=0
