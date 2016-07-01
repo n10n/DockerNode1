@@ -22,11 +22,10 @@ ENV UIAJAR server.server-1.0.1-assets.jar
 ENV UIEJAR server.server-1.0.1-sans-externalized.jar
 ENV UISJAR sharedjvm.sharedjvm-0.1-SNAPSHOT.jar
 
-COPY precompiled.sh $W_DIR/
-COPY entrypoint.sh $W_DIR/
-
 RUN \
     cd $W_DIR \
+    && wget https://github.com/n10n/DockerNode/raw/precompiled/entrypoint.sh -O $W_DIR/entrypoint.sh \
+    && wget https://github.com/n10n/DockerNode/raw/precompiled/precompiled.sh -O $W_DIR/precompiled.sh \
     && chmod 755 $W_DIR/entrypoint.sh $W_DIR/precompiled.sh \
     && ./precompiled.sh \
 #    && ./reducesize.sh
