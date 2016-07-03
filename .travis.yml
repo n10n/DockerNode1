@@ -10,9 +10,6 @@ before_install:
   - docker run -p 127.0.0.1:8080:9000 -d precompilednode /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/frontui;"
   - docker ps -a
   
-script:
-  - bundle exec bin/splicious
-  
 after_success:
   - if [ "$TRAVIS_BRANCH" == "precompiled" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
