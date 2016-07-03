@@ -1,0 +1,18 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t xxx .
+  - docker run -d -p 127.0.0.1:80:9876 livelygig/ /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/splicious;"
+  - docker ps -a
+  - docker run -d -p 127.0.0.1:8080:9000 xxxx /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/frontui"
+
+script:
+  - bundle exec bin/splicious
+  
+  
+  
