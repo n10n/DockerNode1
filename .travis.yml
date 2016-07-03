@@ -1,18 +1,21 @@
 sudo: required
 
-language: ruby
-
 services:
   - docker
 
 before_install:
-  - docker build -t xxx .
-  - docker run -d -p 127.0.0.1:80:9876 livelygig/ /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/splicious;"
+  - docker build -t precompilednode .
+  - docker run -p 127.0.0.1:80:9876 -d precompilednode /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/splicious;"
   - docker ps -a
-  - docker run -d -p 127.0.0.1:8080:9000 xxxx /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/frontui"
-
+  - docker run -p 127.0.0.1:8080:9000 -d precompilednode /bin/bash -c "cd /usr/local/splicious/; bundle exec bin/frontui;"
+  - docker ps -a
+  
 script:
   - bundle exec bin/splicious
   
-  
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "precompiled" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push livelygig/precompilednode;
+    fi
   
