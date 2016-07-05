@@ -39,17 +39,14 @@ sed -i 's/dbHost = \"127.0.0.1\"/dbHost = \"'$DB_HOST'\"/' $EVAL_FILE
 sed -i 's/dbPort = \"27017\"/dbPort = \"'$DB_PORT'\"/' $EVAL_FILE
 
 #DeploymentMode
-sed -i 's/deploymentMode = \"colocated\"/deploymentMode = \"'$DEPLOYMENT_MODE'\"/' $EVAL_FILE
+#sed -i 's/deploymentMode = \"colocated\"/deploymentMode = \"'$DEPLOYMENT_MODE'\"/' $EVAL_FILE
 #DSLCommLinkServer
-sed -i 's/DSLCommLinkServerHost = \"127.0.0.1\"/DSLCommLinkServerHost = \"'$DSLSERVER'\"/' $EVAL_FILE
-#sed -i 's/DSLCommLinkServerPort = \"5672\"/DSLCommLinkServerPort = \"'$DSLPORT'\"/' $EVAL_FILE
-sed -i 's/DSLCommLinkServerPort = 5672/DSLCommLinkServerPort = \"'$DSLPORT'\"/' $EVAL_FILE
+#sed -i 's/DSLCommLinkServerHost = \"127.0.0.1\"/DSLCommLinkServerHost = \"'$DSLSERVER'\"/' $EVAL_FILE
+#sed -i 's/DSLCommLinkServerPort = 5672/DSLCommLinkServerPort = \"'$DSLPORT'\"/' $EVAL_FILE
 #BFactoryCommLinkServer
-sed -i 's/BFactoryCommLinkServerHost = \"127.0.0.1\"/BFactoryCommLinkServerHost = \"'$BFCLSERVER'\"/' $EVAL_FILE
-#sed -i 's/BFactoryCommLinkServerPort = \"5672\"/BFactoryCommLinkServerPort = \"'$BFCLPORT'\"/' $EVAL_FILE
-sed -i 's/BFactoryCommLinkServerPort = 5672/BFactoryCommLinkServerPort = \"'$BFCLPORT'\"/' $EVAL_FILE
+#sed -i 's/BFactoryCommLinkServerHost = \"127.0.0.1\"/BFactoryCommLinkServerHost = \"'$BFCLSERVER'\"/' $EVAL_FILE
+#sed -i 's/BFactoryCommLinkServerPort = 5672/BFactoryCommLinkServerPort = \"'$BFCLPORT'\"/' $EVAL_FILE
 #DSLEvaluatorPreferredSupplier
-sed -i 's/DSLEvaluatorPreferredSupplierHost = \"127.0.0.1\"/DSLEvaluatorPreferredSupplierHost = \"'$DSLEPSSERVER'\"/' $EVAL_FILE
-#sed -i 's/DSLEvaluatorPreferredSupplierPort = \"5672\"/DSLEvaluatorPreferredSupplierPort = \"'$DSLEPSPORT'\"/' $EVAL_FILE
-sed -i 's/DSLEvaluatorPreferredSupplierPort = 5672/DSLEvaluatorPreferredSupplierPort = \"'$DSLEPSPORT'\"/' $EVAL_FILE
+#sed -i 's/DSLEvaluatorPreferredSupplierHost = \"127.0.0.1\"/DSLEvaluatorPreferredSupplierHost = \"'$DSLEPSSERVER'\"/' $EVAL_FILE
+#sed -i 's/DSLEvaluatorPreferredSupplierPort = 5672/DSLEvaluatorPreferredSupplierPort = \"'$DSLEPSPORT'\"/' $EVAL_FILE
 exec "$@"
