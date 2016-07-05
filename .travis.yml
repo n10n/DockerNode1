@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t precompilednode .
+  - docker build -t precompilednode
   - docker run --name spliciousnode -p 127.0.0.1:80:9876 -e DB_HOST=127.0.0.1 -d precompilednode /usr/local/splicious/bin/splicious
   - docker logs spliciousnode
   - docker run --name frontuinode -p 127.0.0.1:8080:9000 -d precompilednode /usr/local/splicious/bin/frontui
