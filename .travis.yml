@@ -5,9 +5,9 @@ services:
 
 before_install: 
   - docker build -t precompilednode .
-  - docker run --name pcnode1 -p 127.0.0.1:80:9876 -e DB_HOST=52.38.140.87 -d precompilednode /usr/local/splicious/bin/splicious
+  - docker run --name pcnode1bk -p 127.0.0.1:80:9876 -e DB_HOST=52.38.140.87 -d precompilednode /usr/local/splicious/bin/splicious
   - docker logs pcnode1bk
-  - docker run --name pcnode2 -p 127.0.0.1:8080:9000 -d precompilednode /usr/local/splicious/bin/frontui
+  - docker run --name pcnode2ui -p 127.0.0.1:8080:9000 -d precompilednode /usr/local/splicious/bin/frontui
   - docker logs pcnode2ui
   
 after_success:
