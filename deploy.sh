@@ -44,11 +44,11 @@ fi
   fi
   \
   cd $W_DIR/SpecialK && \
-  mvn -e -fn -DskipTests=true install prepare-package && \
+  mvn -e -fn -Dmaven.test.skip=true -DskipTests=true install prepare-package && \
   cd $W_DIR/agent-service-ati-ia/AgentServices-Store && \
-  mvn -e -fn -DskipTests=true install prepare-package && \
+  mvn -e -fn -Dmaven.test.skip=true -DskipTests=true install prepare-package && \
   cd $W_DIR/GLoSEval && \
-  mvn -e -fn -DskipTests=true install prepare-package && \
+  mvn -e -fn -Dmaven.test.skip=true -DskipTests=true install prepare-package && \
   \
   cp -rp $W_DIR/SpecialK/target/lib/* $S_DIR/lib/ && \
   cp -rp $W_DIR/agent-service-ati-ia/AgentServices-Store/target/lib/* $S_DIR/lib/ && \
