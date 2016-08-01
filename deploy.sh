@@ -69,6 +69,7 @@ fi
   \
 ## New UI
   cd $W_DIR/frontuic && \
+# sbt -java-home /usr/lib/jvm/java-1.8-openjdk -verbose -J-Xmx2G -Dconfig.trace=loads stage && \  
 #  sbt -java-home /usr/local/jdk1.8.0_77 -verbose -J-Xmx2G -Dconfig.trace=loads stage && \
   sbt -verbose -J-Xmx3G -Dconfig.trace=loads stage && \
   cp -fp $W_DIR/frontuic/server/target/universal/stage/conf/application.conf $S_DIR/config/ui.conf && \
